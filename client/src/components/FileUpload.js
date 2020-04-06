@@ -42,8 +42,8 @@ const FileUpload = ({ isSubmitting, setIsSubmitting, pdfFileName }) => {
       });
 
     } catch (err) {
-      if (err.response.status === 500) console.log('Server Error');
-      console.log(err.response.data.msg);
+
+      console.log(err);
     }
     setIsSubmitting(false);
 

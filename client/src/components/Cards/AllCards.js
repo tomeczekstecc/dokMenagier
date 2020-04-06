@@ -57,7 +57,8 @@ const AllCards = (props) => {
   };
   return (
     <div>
-      <TopHeader title='Wszystkie dokumenty' />
+      <TopHeader title='Zarządzaj instrukcjami' icon='fas fa-folder-open' />
+      <h3 style={style.h3}>INSTRUKCJE DLA OPERATORA</h3>
       <div className='animated fadeIn' style={style}>
         {docs !== null
           ? docs
@@ -81,7 +82,7 @@ const AllCards = (props) => {
           borderRadius: '1px',
         }}
       ></div>
-
+      <h3 style={style.h3}>INSTRUKCJE DLA BENEFICJENTA</h3>
       <div className='animated fadeIn' style={style}>
         {docs !== null
           ? docs
@@ -112,6 +113,9 @@ const style = {
   display: 'flex',
   flexWrap: 'wrap',
   justifyContent: 'flex-start',
+  h3: {
+    margin: '30px 0px -30px 30px',
+  },
 };
 
 export default AllCards;

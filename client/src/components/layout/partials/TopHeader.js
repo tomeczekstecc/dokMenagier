@@ -1,24 +1,32 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const TopHeader = (props) => {
+  let homeDisable, allDocsDisable, addDocDisable, EditDocDisable;
+
+  if (props.title === 'Zarządzaj instrukcjami') {
+    allDocsDisable = 'none';
+  } else if (props.title === 'Strona startowa') {
+    homeDisable = 'none';
+  }
   return (
     <div>
       <header>
         <div style={style}>
-          <div style={style.textWhite}> {props.title}</div>
+          <div style={style.textWhite}>
+            <i className={props.icon}></i> {props.title}
+          </div>
 
-          <div>
-            <Link style={style.textLight} to="/alldocs">
-              Wszystkie dokumenty
+          <div style={{ display: `${allDocsDisable}` }}>
+            <Link style={style.textLight} to='/alldocs'>
+              <i className='fas fa-cog'></i> Zarządzaj
             </Link>
           </div>
 
-          <div>
-            {" "}
-            <Link style={style.textLight} to="/">
-              {" "}
-              Start{" "}
+          <div style={{ display: `${homeDisable}` }}>
+            {' '}
+            <Link style={style.textLight} to='/'>
+              <i className='fas fa-home'></i> Start
             </Link>
           </div>
         </div>
@@ -28,25 +36,24 @@ const TopHeader = (props) => {
 };
 
 const style = {
-
-  display: "flex",
-  width: "100%",
-  height: "100%",
-  background: "#0275d8",
-  textAlign: "center",
-  padding: "20px",
-  display: "flex",
-  flexDirection: "column",
+  display: 'flex',
+  justifyContent: 'space-around',
+  alignItems: 'center',
+  alignContent: 'center',
+  background: '#0275d8',
+  textAlign: 'center',
+  padding: '20px',
+  display: 'flex',
 
   textWhite: {
-    fontSize: "1.5rem",
-    fontWeight: "bold",
-    color: "white",
+    fontSize: '2.2rem',
+    marginRight: '3rem',
+    fontWeight: 'bold',
+    color: 'white',
   },
   textLight: {
-    fontSize: "1rem",
-
-    color: "white",
+    fontSize: '1.4rem',
+    color: 'white',
   },
 };
 

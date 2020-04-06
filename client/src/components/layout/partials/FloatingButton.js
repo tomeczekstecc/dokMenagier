@@ -7,8 +7,8 @@ const FloatingButton = (props) => {
 
   let icon, color, bootstrapClass;
 
-  if (text === "Zobacz") {
-    icon = "fa fa-list";
+  if (text === "Zarządzaj") {
+    icon = "fa fa-cog";
     color = "#5cb85c";
     bootstrapClass = "success";
   } else if (text === "Dodaj") {

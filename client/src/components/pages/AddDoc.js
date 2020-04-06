@@ -140,7 +140,7 @@ const AddDoc = (props) => {
 
   return (
     <>
-      <TopHeader title='Dodawanie dokumentu' />
+      <TopHeader title='Dodawanie dokumentu' icon='fas fa-file-import'/>
 
       <div style={style}>
         <Form

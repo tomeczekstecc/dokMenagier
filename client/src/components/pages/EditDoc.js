@@ -168,7 +168,7 @@ const EditDoc = (props) => {
 
   return (
     <>
-      <TopHeader title='Edycja dokumentu' />
+      <TopHeader title='Edycja dokumentu' icon='fas fa-file-signature'/>
 
       <div style={style}>
         <Form
@@ -420,8 +420,8 @@ const style = {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  height: '80vh',
-  width: '80%',
+  height: '100%',
+  width: '100%',
 };
 
 const WrappedEditDocForm = Form.create({ name: 'edit' })(EditDoc);

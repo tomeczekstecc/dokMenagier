@@ -5,12 +5,12 @@ import TopHeader from '../layout/partials/TopHeader'
 const Home = () => {
   return (
     <>
-    <TopHeader title='Strona startowa'/>
+    <TopHeader title='Strona startowa' icon='fas fa-home'/>
     <div style={style.main}>
       <div style={style.item}>
         <FloatingButton
           scale={2}
-          text="Zobacz"
+          text="Zarządzaj"
           linkTo="alldocs"
           position="relative"
           p_marginTop='60px'
@@ -42,7 +42,7 @@ const style = {
     alignItems: "center",
     alignContent: "center",
     top: "40%",
-    left: "50%",
+    left: "45%",
   },
   item: {
     display: 'flex',
