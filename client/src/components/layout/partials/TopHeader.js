@@ -28,6 +28,7 @@ const TopHeader = (props) => {
 };
 
 const style = {
+
   display: "flex",
   width: "100%",
   height: "100%",
