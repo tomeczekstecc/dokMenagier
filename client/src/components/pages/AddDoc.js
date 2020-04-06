@@ -6,6 +6,7 @@ import { useSnackbar } from 'notistack';
 import DocContext from '../../context/doc/docContext';
 import FileUpload from '../FileUpload';
 import TopHeader from '../layout/partials/TopHeader';
+import CardAntPreview from '../layout/partials/CardAntPreview';
 
 const { Option } = Select;
 
@@ -19,7 +20,7 @@ const AddDoc = (props) => {
       title: '',
       target: '',
       type: '',
-      shortTitle: '',
+      shortTitle: 'TEST',
       publishDate: '',
       ver: '',
       prevVer: '',
@@ -29,7 +30,18 @@ const AddDoc = (props) => {
     });
   }, []);
 
-  const [body, setBody] = useState({});
+  const [body, setBody] = useState({
+    title: '',
+    target: '',
+    type: '',
+    shortTitle: 'TEST',
+    publishDate: '',
+    ver: '',
+    prevVer: '',
+    pagesCount: '',
+    premiereTag: '',
+    archived: '',
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [allSet, setAllSet] = useState(false);
   const [pending, setPending] = useState(false);
@@ -124,9 +136,9 @@ const AddDoc = (props) => {
           });
         }
       });
-        setTimeout(() => {
-          setPending(false);
-        }, 4000);
+      setTimeout(() => {
+        setPending(false);
+      }, 4000);
     } catch (error) {
       enqueueSnackbar(`${error.message}`, {
         variant: `error`,
@@ -140,8 +152,11 @@ const AddDoc = (props) => {
 
   return (
     <>
-      <TopHeader title='Dodawanie dokumentu' icon='fas fa-file-import'/>
+      <TopHeader title='Dodawanie dokumentu' icon='fas fa-file-import' />
 
+      <div style={style.preview}>
+        <CardAntPreview body={body} />
+      </div>
       <div style={style}>
         <Form
           {...formItemLayout}
@@ -342,7 +357,12 @@ const AddDoc = (props) => {
           </Form.Item>
 
           <Form.Item {...tailFormItemLayout}>
-            <Button loading ={pending} disabled={!allReady} type='primary' htmlType='submit'>
+            <Button
+              loading={pending}
+              disabled={!allReady}
+              type='primary'
+              htmlType='submit'
+            >
               Utwórz
             </Button>
           </Form.Item>
@@ -357,7 +377,14 @@ const style = {
   justifyContent: 'center',
   alignItems: 'center',
   height: '100%',
-  width: '100%',
+  width: '80%',
+  marginLeft:'10%',
+  preview: {
+position: 'fixed',
+left:'150px',
+top:'175px',
+transform: 'scale(1.5)'
+  },
 };
 
 const WrappedAddNewDocForm = Form.create({ name: 'register' })(AddDoc);
