@@ -1,8 +1,11 @@
 import React from "react";
 import FloatingButton from "../layout/partials/FloatingButton";
+import TopHeader from '../layout/partials/TopHeader'
 
 const Home = () => {
   return (
+    <>
+    <TopHeader title='Strona startowa'/>
     <div style={style.main}>
       <div style={style.item}>
         <FloatingButton
@@ -25,6 +28,7 @@ const Home = () => {
         />
       </div>
     </div>
+    </>
   );
 };
 
