@@ -21,21 +21,27 @@ const CardAntPreview = ({ body }) => {
   }
 
   return (
-    <div style={{ zIndex: -2 }}>
+    <div
+      id='card_ant'
+      style={{
+        zIndex: -2,
+        fontFamily:
+          'apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji',
+      }}
+    >
       <div>
         <i
           className={iconType}
           style={{
-
             transform: 'translate(235px,210px) scale(1.1)',
-            position:'fixed',
+            position: 'fixed',
             zIndex: 10,
             width: '20px',
             display: 'block',
             color: 'rgba(0,0,0,0.4)',
             fontSize: '1.8em',
             zIndex: 1,
-           }}
+          }}
         ></i>
       </div>
       <Badge

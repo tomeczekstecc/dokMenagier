@@ -29,14 +29,20 @@ const CardAnt = ({
   }
 
   return (
-    <div style={{zIndex:-2}}>
+    <div id='card_ant'
+      style={{
+        zIndex: -2,
+        fontFamily:
+          'apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji',
+      }}
+    >
       <div>
         <i
           className={iconType}
           style={{
             transform: 'translate(235px,235px) scale(1.1)',
             zIndex: 10,
-            maxWidth:"50px",
+            maxWidth: '50px',
             display: 'block',
             color: 'rgba(0,0,0,0.4)',
             fontSize: '1.8em',

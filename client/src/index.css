@@ -1,3 +1,23 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:400,700&display=swap&subset=latin-ext');;
 body{
-  color:#db4d4d
+font-family: 'Montserrat', sans-serif;
+
+}
+a{
+  transition: all .5 ease-in-out;
+}
+
+
+a:hover {
+  text-decoration: none;
+transform: scale(1.05);
+}
+
+#card_ant{
+transition: all 0.1s ease-in-out;
+}
+
+#card_ant:hover{
+transform: translateY(-5px);
+
 }
