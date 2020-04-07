@@ -152,17 +152,11 @@ const AddDoc = (props) => {
 
   return (
     <>
-      <TopHeader title='Dodawanie dokumentu' icon='fas fa-file-import' />
-      <div style={style.container}>
-        <div style={style.preview}>
-          <CardAntPreview body={body} />
-        </div>
-        <div style={style.form}>
-          <Form
-            {...formItemLayout}
-            onSubmit={handleSubmit}
-            style={{ width: 1100, marginTop: 50 }}
-          >
+      <div style={style.main}>
+        <TopHeader title='Dodawanie dokumentu' icon='fas fa-file-import' />
+        <div style={style.container}>
+          <CardAntPreview style={style.preview} body={body} />
+          <Form {...formItemLayout} onSubmit={handleSubmit} style={style.form}>
             <Form.Item label='Tytuł' onChange={handleChange} hasFeedback>
               {getFieldDecorator('title', {
                 rules: [
@@ -374,25 +368,14 @@ const AddDoc = (props) => {
 };
 
 const style = {
+  main: {
+    // maxWidth: '100%',
+  },
   container: {
     display: 'grid',
-    gridTemplateColumns: '1fr 2fr'
-
-  },
-
-  form: {
-    height: '100%',
-    width: '80%',
-  },
-
-  preview: {
-    // position: 'static',
-    // left: '150px',
-    // top: '175px',
-    // width:'100%',
-    // height:'100%',
-    transform: 'scale(1.5)',
-  },
+    gridTemplateColumns: '30% 70%',
+    width: '100%',
+  }
 };
 
 const WrappedAddNewDocForm = Form.create({ name: 'register' })(AddDoc);

@@ -22,7 +22,7 @@ const CardAntPreview = ({ body }) => {
 
   return (
     <div
-      id='card_ant'
+      id='card_ant_preview'
       style={{
         zIndex: -2,
         fontFamily:

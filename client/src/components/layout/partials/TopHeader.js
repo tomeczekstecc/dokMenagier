@@ -37,6 +37,7 @@ const TopHeader = (props) => {
 
 const style = {
   display: 'flex',
+  maxWidth: '100%',
   justifyContent: 'space-around',
   alignItems: 'center',
   alignContent: 'center',
@@ -44,16 +45,19 @@ const style = {
   textAlign: 'center',
   padding: '20px',
   display: 'flex',
+  maxWidth: '100%',
 
   textWhite: {
     fontSize: '2.2rem',
     marginRight: '3rem',
     fontWeight: 'bold',
     color: 'white',
+    maxWidth: '100%',
   },
   textLight: {
     fontSize: '1.4rem',
     color: 'white',
+    maxWidth: '100%',
   },
 };
 
