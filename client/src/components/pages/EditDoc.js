@@ -5,6 +5,7 @@ import axios from 'axios';
 import FileUpload from '../FileUpload';
 import { useSnackbar } from 'notistack';
 import { Form, Input, Tooltip, Icon, Select, Button } from 'antd';
+import CardAntPreview from '../layout/partials/CardAntPreview';
 
 const { Option } = Select;
 
@@ -13,16 +14,12 @@ const EditDoc = (props) => {
   const docContext = useContext(DocContext);
   const {
     curDoc,
-    transferDone,
-    setTransferDone,
     setAllReady,
-    allReady,
   } = docContext;
 
   const { enqueueSnackbar } = useSnackbar();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [allSet, setAllSet] = useState(false);
   const [pending, setPending] = useState(false);
 
   let {
@@ -99,9 +96,9 @@ const EditDoc = (props) => {
     } else if (e === 'notarchived') {
       body.archived = false;
     } else {
-      body[e.target.id.split('register_')[1]] = e.target.value;
+      body[e.target.id.split('edit_')[1]] = e.target.value;
     }
-
+console.log(body);
     body.pdfFileName = `${
       '[' + body.ver + ']' + '_' + body.shortTitle + '_' + body.target
     }.pdf`;
@@ -168,260 +165,271 @@ const EditDoc = (props) => {
 
   return (
     <>
-      <TopHeader title='Edycja dokumentu' icon='fas fa-file-signature'/>
+      <div style={style.main}>
+        <TopHeader title='Edycja dokumentu' icon='fas fa-file-signature' />
 
-      <div style={style}>
-        <Form
-          {...formItemLayout}
-          onSubmit={handleSubmit}
-          style={{ width: 1100, marginTop: 50 }}
-        >
-          <Form.Item label='Tytuł' onChange={handleChange} hasFeedback>
-            {getFieldDecorator(
-              'title',
-              { initialValue: title },
-              {
-                rules: [
-                  {
-                    min: 3,
-                    message: 'Tytuł musi składać się z co najmniej 3 znaków',
-                  },
-                  {
-                    max: 100,
-                    message: 'Tytuł może składać się z co najwyżej 100 znaków',
-                  },
-                  {
-                    required: true,
-                    message: 'Musisz podać tytuł',
-                  },
-                ],
-              }
-            )(<Input />)}
-          </Form.Item>
-
-          <Form.Item label='Typ instrukcji' hasFeedback>
-            {getFieldDecorator(
-              'type',
-              { initialValue: type },
-              {
-                rules: [
-                  {
-                    required: true,
-                    message: 'Musisz wybrać wartosć',
-                  },
-                ],
-              }
-            )(
-              <Select onChange={handleChange} style={{ width: 175 }}>
-                <Option value='pdf'>PDF</Option>
-                <Option value='film'>Film</Option>
-              </Select>
-            )}
-          </Form.Item>
-
-          <Form.Item label='Dla kogo' hasFeedback>
-            {getFieldDecorator(
-              'target',
-              { initialValue: target },
-              {
-                rules: [
-                  {
-                    required: true,
-                    message: 'Musisz wybrać wartosć',
-                  },
-                ],
-              }
-            )(
-              <Select onChange={handleChange} style={{ width: 175 }}>
-                <Option value='ben'>Beneficjent</Option>
-                <Option value='oper'>Operator</Option>
-              </Select>
-            )}
-          </Form.Item>
-
-          <Form.Item label='Krótki tytuł' onChange={handleChange} hasFeedback>
-            {getFieldDecorator(
-              'shortTitle',
-              { initialValue: shortTitle },
-              {
-                rules: [
-                  {
-                    min: 3,
-                    message:
-                      'Krótki tytuł musi składać się z co najmniej 3 znaków',
-                  },
-                  {
-                    required: true,
-                    message: 'Musisz podać krótki tytuł',
-                  },
-                ],
-              }
-            )(<Input />)}
-          </Form.Item>
-
-          <Form.Item
-            onChange={handleChange}
-            hasFeedback
-            label={
-              <span>
-                Data publikacji&nbsp;
-                <Tooltip title='Data publikacji powinna mieć format: IV.2000'>
-                  <Icon type='question-circle-o' />
-                </Tooltip>
-              </span>
-            }
+        <div style={style.container}>
+          <CardAntPreview
+            style={style.preview}
+            body={body}
+            className='animated slideInLeft'
+          />
+          <Form
+            {...formItemLayout}
+            onSubmit={handleSubmit}
+            className='animated slideInLeft'
           >
-            {getFieldDecorator(
-              'publishDate',
-              { initialValue: publishDate },
-              {
-                rules: [
-                  {
-                    required: true,
-                    message: 'Podaj datę publikacji',
-                    whitespace: true,
-                  },
-                  {
-                    min: 6,
-                    message:
-                      'Data publikacji powinna składać się z co najmniiej 6 znaków (np."I.2020")',
-                  },
-                  {
-                    max: 9,
-                    message:
-                      'Data publikacji powinna składać się najwyżej z 8 znaków (np."XII.2020")',
-                  },
-                ],
-              }
-            )(<Input />)}
-          </Form.Item>
-
-          <Form.Item label='Wersja' onChange={handleChange} hasFeedback>
-            {getFieldDecorator(
-              'ver',
-              { initialValue: ver },
-              {
-                rules: [
-                  {
-                    required: true,
-                    message: 'Podaj numer wersji',
-                    whitespace: true,
-                  },
-                ],
-              }
-            )(<Input />)}
-          </Form.Item>
-
-          <Form.Item
-            onChange={handleChange}
-            label='Poprzednia wersja'
-            hasFeedback
-          >
-            {getFieldDecorator(
-              'prevVer',
-              { initialValue: prevVer },
-              {
-                rules: [
-                  {
-                    required: true,
-                    message: 'Podaj numer wersji',
-                    whitespace: true,
-                  },
-                ],
-              }
-            )(<Input />)}
-          </Form.Item>
-
-          <Form.Item onChange={handleChange} label='Liczba stron' hasFeedback>
-            {getFieldDecorator(
-              'pagesCount',
-              { initialValue: pagesCount },
-              {
-                rules: [
-                  {
-                    required: true,
-                    message: 'Podaj liczbę stron',
-                    whitespace: true,
-                  },
-                ],
-              }
-            )(<Input type='number' />)}
-          </Form.Item>
-
-          <Form.Item label='Oznacz jako premierowe' hasFeedback>
-            {getFieldDecorator(
-              'premiereTag',
-              { initialValue: convPremiereTag },
-              {
-                rules: [
-                  {
-                    required: true,
-                    message: 'Wybierz wartość',
-                  },
-                ],
-              }
-            )(
-              <Select onChange={handleChange} style={{ width: 175 }}>
-                <Option value='notpremiere'>Nie</Option>
-                <Option value='premiere'>Tak</Option>
-              </Select>
-            )}
-          </Form.Item>
-
-          <Form.Item label='Oznacz jako archiwalne' hasFeedback>
-            {getFieldDecorator(
-              'archived',
-              { initialValue: convArchived },
-              {
-                rules: [
-                  {
-                    required: true,
-                    message: 'Wybierz wartość',
-                  },
-                ],
-              }
-            )(
-              <Select onChange={handleChange} style={{ width: 175 }}>
-                <Option value='notarchived'>Nie</Option>
-                <Option value='archived'>Tak</Option>
-              </Select>
-            )}
-          </Form.Item>
-
-          <Form.Item onChange={handleChange} label='Dodaj plik' hasFeedback>
-            {getFieldDecorator('file', {
-              rules: [
+            <Form.Item label='Tytuł' onChange={handleChange} hasFeedback>
+              {getFieldDecorator(
+                'title',
+                { initialValue: title },
                 {
-                  required: true,
-                  message: 'Dodaj plik',
-                },
-              ],
-            })(
-              <FileUpload
-                isSubmitting={isSubmitting}
-                setIsSubmitting={setIsSubmitting}
-                pdfFileName={body.pdfFileName}
-              />
-            )}
-          </Form.Item>
+                  rules: [
+                    {
+                      min: 3,
+                      message: 'Tytuł musi składać się z co najmniej 3 znaków',
+                    },
+                    {
+                      max: 100,
+                      message:
+                        'Tytuł może składać się z co najwyżej 100 znaków',
+                    },
+                    {
+                      required: true,
+                      message: 'Musisz podać tytuł',
+                    },
+                  ],
+                }
+              )(<Input />)}
+            </Form.Item>
 
-          <Form.Item {...tailFormItemLayout}>
-            <Button loading={pending} type='primary' htmlType='submit'>
-              Aktualizuj
-            </Button>
-          </Form.Item>
-        </Form>
+            <Form.Item label='Typ instrukcji' hasFeedback>
+              {getFieldDecorator(
+                'type',
+                { initialValue: type },
+                {
+                  rules: [
+                    {
+                      required: true,
+                      message: 'Musisz wybrać wartosć',
+                    },
+                  ],
+                }
+              )(
+                <Select onChange={handleChange} style={{ width: 175 }}>
+                  <Option value='pdf'>PDF</Option>
+                  <Option value='film'>Film</Option>
+                </Select>
+              )}
+            </Form.Item>
+
+            <Form.Item label='Dla kogo' hasFeedback>
+              {getFieldDecorator(
+                'target',
+                { initialValue: target },
+                {
+                  rules: [
+                    {
+                      required: true,
+                      message: 'Musisz wybrać wartosć',
+                    },
+                  ],
+                }
+              )(
+                <Select onChange={handleChange} style={{ width: 175 }}>
+                  <Option value='ben'>Beneficjent</Option>
+                  <Option value='oper'>Operator</Option>
+                </Select>
+              )}
+            </Form.Item>
+
+            <Form.Item label='Krótki tytuł' onChange={handleChange} hasFeedback>
+              {getFieldDecorator(
+                'shortTitle',
+                { initialValue: shortTitle },
+                {
+                  rules: [
+                    {
+                      min: 3,
+                      message:
+                        'Krótki tytuł musi składać się z co najmniej 3 znaków',
+                    },
+                    {
+                      required: true,
+                      message: 'Musisz podać krótki tytuł',
+                    },
+                  ],
+                }
+              )(<Input />)}
+            </Form.Item>
+
+            <Form.Item
+              onChange={handleChange}
+              hasFeedback
+              label={
+                <span>
+                  Data publikacji&nbsp;
+                  <Tooltip title='Data publikacji powinna mieć format: IV.2000'>
+                    <Icon type='question-circle-o' />
+                  </Tooltip>
+                </span>
+              }
+            >
+              {getFieldDecorator(
+                'publishDate',
+                { initialValue: publishDate },
+                {
+                  rules: [
+                    {
+                      required: true,
+                      message: 'Podaj datę publikacji',
+                      whitespace: true,
+                    },
+                    {
+                      min: 6,
+                      message:
+                        'Data publikacji powinna składać się z co najmniiej 6 znaków (np."I.2020")',
+                    },
+                    {
+                      max: 9,
+                      message:
+                        'Data publikacji powinna składać się najwyżej z 8 znaków (np."XII.2020")',
+                    },
+                  ],
+                }
+              )(<Input />)}
+            </Form.Item>
+
+            <Form.Item label='Wersja' onChange={handleChange} hasFeedback>
+              {getFieldDecorator(
+                'ver',
+                { initialValue: ver },
+                {
+                  rules: [
+                    {
+                      required: true,
+                      message: 'Podaj numer wersji',
+                      whitespace: true,
+                    },
+                  ],
+                }
+              )(<Input />)}
+            </Form.Item>
+
+            <Form.Item
+              onChange={handleChange}
+              label='Poprzednia wersja'
+              hasFeedback
+            >
+              {getFieldDecorator(
+                'prevVer',
+                { initialValue: prevVer },
+                {
+                  rules: [
+                    {
+                      required: true,
+                      message: 'Podaj numer wersji',
+                      whitespace: true,
+                    },
+                  ],
+                }
+              )(<Input />)}
+            </Form.Item>
+
+            <Form.Item onChange={handleChange} label='Liczba stron' hasFeedback>
+              {getFieldDecorator(
+                'pagesCount',
+                { initialValue: pagesCount },
+                {
+                  rules: [
+                    {
+                      required: true,
+                      message: 'Podaj liczbę stron',
+                      whitespace: true,
+                    },
+                  ],
+                }
+              )(<Input type='number' />)}
+            </Form.Item>
+
+            <Form.Item label='Oznacz jako premierowe' hasFeedback>
+              {getFieldDecorator(
+                'premiereTag',
+                { initialValue: convPremiereTag },
+                {
+                  rules: [
+                    {
+                      required: true,
+                      message: 'Wybierz wartość',
+                    },
+                  ],
+                }
+              )(
+                <Select onChange={handleChange} style={{ width: 175 }}>
+                  <Option value='notpremiere'>Nie</Option>
+                  <Option value='premiere'>Tak</Option>
+                </Select>
+              )}
+            </Form.Item>
+
+            <Form.Item label='Oznacz jako archiwalne' hasFeedback>
+              {getFieldDecorator(
+                'archived',
+                { initialValue: convArchived },
+                {
+                  rules: [
+                    {
+                      required: true,
+                      message: 'Wybierz wartość',
+                    },
+                  ],
+                }
+              )(
+                <Select onChange={handleChange} style={{ width: 175 }}>
+                  <Option value='notarchived'>Nie</Option>
+                  <Option value='archived'>Tak</Option>
+                </Select>
+              )}
+            </Form.Item>
+
+            <Form.Item onChange={handleChange} label='Dodaj plik' hasFeedback>
+              {getFieldDecorator('file', {
+                rules: [
+                  {
+                    required: true,
+                    message: 'Dodaj plik',
+                  },
+                ],
+              })(
+                <FileUpload
+                  isSubmitting={isSubmitting}
+                  setIsSubmitting={setIsSubmitting}
+                  pdfFileName={body.pdfFileName}
+                />
+              )}
+            </Form.Item>
+
+            <Form.Item {...tailFormItemLayout}>
+              <Button loading={pending} type='primary' htmlType='submit'>
+                Aktualizuj
+              </Button>
+            </Form.Item>
+          </Form>
+        </div>
       </div>
     </>
   );
 };
 
 const style = {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  height: '100%',
-  width: '100%',
+  main: {
+    // maxWidth: '100%',
+  },
+  container: {
+    display: 'grid',
+    gridTemplateColumns: '30% 70%',
+    width: '100%',
+  },
 };
 
 const WrappedEditDocForm = Form.create({ name: 'edit' })(EditDoc);

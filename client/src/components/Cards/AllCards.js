@@ -4,6 +4,9 @@ import axios from 'axios';
 import DocContext from '../../context/doc/docContext';
 import TopHeader from '../layout/partials/TopHeader';
 import { useSnackbar } from 'notistack';
+import { Divider } from 'antd';
+
+
 import FloatingButton from '../layout/partials/FloatingButton';
 
 const AllCards = (props) => {
@@ -58,7 +61,8 @@ const AllCards = (props) => {
   return (
     <div>
       <TopHeader title='Zarządzaj instrukcjami' icon='fas fa-folder-open' />
-      <h3 style={style.h3}>INSTRUKCJE DLA OPERATORA</h3>
+
+      <h5 style={style.h3}>INSTRUKCJE DLA OPERATORA</h5>
       <div className='animated fadeIn' style={style}>
         {docs !== null
           ? docs
@@ -74,15 +78,8 @@ const AllCards = (props) => {
               ))
           : null}
       </div>
-      <div
-        style={{
-          height: '1px',
-          borderTop: '3px solid #474b52',
-          margin: '35px',
-          borderRadius: '1px',
-        }}
-      ></div>
-      <h3 style={style.h3}>INSTRUKCJE DLA BENEFICJENTA</h3>
+      <Divider />
+      <h5 style={style.h3}>INSTRUKCJE DLA BENEFICJENTA</h5>
       <div className='animated fadeIn' style={style}>
         {docs !== null
           ? docs

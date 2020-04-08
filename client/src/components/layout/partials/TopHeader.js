@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const TopHeader = (props) => {
-  let homeDisable, allDocsDisable, addDocDisable, EditDocDisable;
+  let homeDisable, allDocsDisable;
 
   if (props.title === 'Zarządzaj instrukcjami') {
     allDocsDisable = 'none';

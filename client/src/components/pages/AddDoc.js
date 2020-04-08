@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 // eslint-disable-next-line
 import axios from 'axios';
-import { Form, Input, Tooltip, Icon, Select, Button } from 'antd';
+import { Form, Input, Tooltip, Icon, Select, Button, Space } from 'antd';
 import { useSnackbar } from 'notistack';
 import DocContext from '../../context/doc/docContext';
 import FileUpload from '../FileUpload';
@@ -12,7 +12,7 @@ const { Option } = Select;
 
 const AddDoc = (props) => {
   const docContext = useContext(DocContext);
-  const { transferDone, setTransferDone, setAllReady, allReady } = docContext;
+  const { setAllReady, allReady } = docContext;
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
@@ -43,7 +43,6 @@ const AddDoc = (props) => {
     archived: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [allSet, setAllSet] = useState(false);
   const [pending, setPending] = useState(false);
 
   const { getFieldDecorator } = props.form;
@@ -87,6 +86,7 @@ const AddDoc = (props) => {
     } else {
       body[e.target.id.split('register_')[1]] = e.target.value;
     }
+
     body.pdfFileName = `${
       '[' + body.ver + ']' + '_' + body.shortTitle + '_' + body.target
     }.pdf`;
@@ -154,9 +154,19 @@ const AddDoc = (props) => {
     <>
       <div style={style.main}>
         <TopHeader title='Dodawanie dokumentu' icon='fas fa-file-import' />
+
         <div style={style.container}>
-          <CardAntPreview style={style.preview} body={body} />
-          <Form {...formItemLayout} onSubmit={handleSubmit} style={style.form}>
+          <CardAntPreview
+            style={style.preview}
+            body={body}
+            className='animated slideInLeft'
+          />
+          <Form
+            className='animated slideInRight'
+            {...formItemLayout}
+            onSubmit={handleSubmit}
+            style={style.form}
+          >
             <Form.Item label='Tytuł' onChange={handleChange} hasFeedback>
               {getFieldDecorator('title', {
                 rules: [
@@ -351,14 +361,25 @@ const AddDoc = (props) => {
             </Form.Item>
 
             <Form.Item {...tailFormItemLayout}>
-              <Button
-                loading={pending}
-                disabled={!allReady}
-                type='primary'
-                htmlType='submit'
-              >
-                Utwórz
-              </Button>
+              <Space>
+                <Button
+                  loading={pending}
+                  disabled={!allReady}
+                  type='primary'
+                  size='large'
+                  htmlType='submit'
+                >
+                  Utwórz
+                </Button>
+                <Button
+                  loading={pending}
+                  size='large'
+                  type='default'
+                  htmlType='submit'
+                >
+                  Wróć
+                </Button>
+              </Space>
             </Form.Item>
           </Form>
         </div>
@@ -375,7 +396,7 @@ const style = {
     display: 'grid',
     gridTemplateColumns: '30% 70%',
     width: '100%',
-  }
+  },
 };
 
 const WrappedAddNewDocForm = Form.create({ name: 'register' })(AddDoc);

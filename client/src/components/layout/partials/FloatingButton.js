@@ -22,35 +22,36 @@ const FloatingButton = (props) => {
       <div
         style={{
           position: `${position}`,
-          bottom: "3vh",
-          right: "3vw",
-          textAlign: "center ",
-          marginLeft: "50px",
+          bottom: '3vh',
+          right: '3vw',
+          textAlign: 'center ',
+          marginLeft: '50px',
         }}
       >
         <button
           style={{
-            borderRadius: "50%",
+            borderRadius: '50%',
             transform: `scale(${scale * 1.7})`,
-            textAlign: "center ",
+            textAlign: 'center ',
           }}
-          type="button"
-          class={`btn btn-${bootstrapClass}`}
+          type='button'
+          className={`btn btn-${bootstrapClass}`}
         >
-          <i class={icon}></i>
+          <i className={icon}></i>
         </button>
         <p
           style={{
             marginTop: `${p_marginTop}`,
             transform: `scale(${scale})`,
-            fontWeight: "bold",
+            fontWeight: 'bold',
             color: `${color}`,
-            textAlign: "center ",
+            textAlign: 'center ',
           }}
         >
           {text}
         </p>
       </div>
+
     </Link>
   );
 };
