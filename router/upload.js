@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
     return res.status(400).json({result:'error', msg: 'Nie załadowano żadnego pliku!' });
   }
 
-  console.log(req.headers.pdfname, 'upload.js');
+
   const file = req.files.file;
 
   file.mv(`${__dirname}/uploads/${file.name}`, (err) => {

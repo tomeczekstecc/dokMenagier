@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useContext } from 'react';
+import React, { Fragment, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import Progress from '../components/layout/partials/Progress';
 import DocContext from '../context/doc/docContext';
@@ -10,6 +10,8 @@ const FileUpload = ({ isSubmitting, setIsSubmitting, pdfFileName }) => {
   const [filename, setFilename] = useState('Kliknij, aby dodać plik ');
   // eslint-disable-next-line
   const [uploadProcentage, setUploadProcentage] = useState(0);
+
+  useEffect(() => {}, []);
 
   const handleOnChange = (e) => {
     setFile(e.target.files[0]);
@@ -31,7 +33,7 @@ const FileUpload = ({ isSubmitting, setIsSubmitting, pdfFileName }) => {
         },
         onUploadProgress: (ProgressEvent) => {
           if (file) {
-                    setUploadProcentage(
+            setUploadProcentage(
               parseInt(
                 Math.round((ProgressEvent.loaded * 100) / ProgressEvent.total)
               )
@@ -40,16 +42,13 @@ const FileUpload = ({ isSubmitting, setIsSubmitting, pdfFileName }) => {
           }
         },
       });
-
     } catch (err) {
-
       console.log(err);
     }
-    setIsSubmitting(false);
-
   };
-  isSubmitting && handleOnSubmit();
 
+  isSubmitting && handleOnSubmit();
+  setIsSubmitting(false);
   return (
     <Fragment>
       <div style={style.main}>

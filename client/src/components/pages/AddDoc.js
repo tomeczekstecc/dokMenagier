@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
 // eslint-disable-next-line
 import axios from 'axios';
-import { Form, Input, Tooltip, Icon, Select, Button, Space } from 'antd';
+import { Form, Input, Tooltip, Icon, Select, Button } from 'antd';
 import { useSnackbar } from 'notistack';
 import DocContext from '../../context/doc/docContext';
 import FileUpload from '../FileUpload';
@@ -117,6 +118,7 @@ const AddDoc = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setPending(true);
       const config = {
         headers: {
           'Content-Type': 'application/json',
@@ -361,25 +363,27 @@ const AddDoc = (props) => {
             </Form.Item>
 
             <Form.Item {...tailFormItemLayout}>
-              <Space>
+              <Button
+                loading={pending}
+                disabled={!allReady}
+                type='primary'
+                size='large'
+                htmlType='submit'
+                style={style.buttonL}
+              >
+                Utwórz
+              </Button>
+
+              <Link to='/alldocs'>
                 <Button
-                  loading={pending}
-                  disabled={!allReady}
-                  type='primary'
-                  size='large'
-                  htmlType='submit'
-                >
-                  Utwórz
-                </Button>
-                <Button
-                  loading={pending}
+                  style={style.buttonR}
                   size='large'
                   type='default'
                   htmlType='submit'
                 >
                   Wróć
                 </Button>
-              </Space>
+              </Link>
             </Form.Item>
           </Form>
         </div>
@@ -396,6 +400,16 @@ const style = {
     display: 'grid',
     gridTemplateColumns: '30% 70%',
     width: '100%',
+  },
+  buttonL: {
+    width: '8rem',
+    height: '3rem',
+  },
+
+  buttonR: {
+    marginLeft: '15px',
+    width: '8rem',
+    height: '3rem',
   },
 };
 

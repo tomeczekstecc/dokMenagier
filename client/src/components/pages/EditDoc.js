@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 import DocContext from '../../context/doc/docContext';
 import TopHeader from '../layout/partials/TopHeader';
 import axios from 'axios';
@@ -12,10 +13,7 @@ const { Option } = Select;
 const EditDoc = (props) => {
   const { id } = props.match.params;
   const docContext = useContext(DocContext);
-  const {
-    curDoc,
-    setAllReady,
-  } = docContext;
+  const { curDoc, setAllReady } = docContext;
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -98,7 +96,7 @@ const EditDoc = (props) => {
     } else {
       body[e.target.id.split('edit_')[1]] = e.target.value;
     }
-console.log(body);
+    console.log(body);
     body.pdfFileName = `${
       '[' + body.ver + ']' + '_' + body.shortTitle + '_' + body.target
     }.pdf`;
@@ -410,9 +408,26 @@ console.log(body);
             </Form.Item>
 
             <Form.Item {...tailFormItemLayout}>
-              <Button loading={pending} type='primary' htmlType='submit'>
+              <Button
+                loading={pending}
+                type='primary'
+                size='large'
+                htmlType='submit'
+                style={style.buttonL}
+              >
                 Aktualizuj
               </Button>
+
+              <Link to='/alldocs'>
+                <Button
+                  style={style.buttonR}
+                  size='large'
+                  type='default'
+                  htmlType='submit'
+                >
+                  Wróć
+                </Button>
+              </Link>
             </Form.Item>
           </Form>
         </div>
@@ -429,6 +444,16 @@ const style = {
     display: 'grid',
     gridTemplateColumns: '30% 70%',
     width: '100%',
+  },
+  buttonL: {
+    width: '8rem',
+    height: '3rem',
+  },
+
+  buttonR: {
+    marginLeft: '15px',
+    width: '8rem',
+    height: '3rem',
   },
 };
 
