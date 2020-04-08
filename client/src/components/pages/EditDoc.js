@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import DocContext from '../../context/doc/docContext';
 import TopHeader from '../layout/partials/TopHeader';
 import axios from 'axios';
-import FileUpload from '../FileUpload';
+import FileUpload from '../layout/partials/FileUpload';
 import { useSnackbar } from 'notistack';
 import { Form, Input, Tooltip, Icon, Select, Button } from 'antd';
 import CardAntPreview from '../layout/partials/CardAntPreview';
@@ -170,12 +170,12 @@ const EditDoc = (props) => {
           <CardAntPreview
             style={style.preview}
             body={body}
-            className='animated slideInLeft'
+
           />
           <Form
             {...formItemLayout}
             onSubmit={handleSubmit}
-            className='animated slideInLeft'
+
           >
             <Form.Item label='Tytuł' onChange={handleChange} hasFeedback>
               {getFieldDecorator(

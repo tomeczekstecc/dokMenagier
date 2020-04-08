@@ -10,55 +10,76 @@ const TopHeader = (props) => {
     homeDisable = 'none';
   }
   return (
-    <div>
-      <header>
-        <div style={style}>
-          <div style={style.textWhite}>
-            <i className={props.icon}></i> {props.title}
-          </div>
+    <nav style={style}>
+      <p style={style.p}>
+        <i className={props.icon}></i> {props.title}
+      </p>
 
-          <div style={{ display: `${allDocsDisable}` }}>
-            <Link style={style.textLight} to='/alldocs'>
-              <i className='fas fa-cog'></i> Zarządzaj
-            </Link>
-          </div>
+      <ul style={style.ul}>
+        <li style={{ display: `${allDocsDisable}` }}>
+          <Link style={style.li} to='/alldocs'>
+            {/* <i className='fas fa-cog'></i> */}
+             Zarządzaj
+          </Link>
+        </li>
 
-          <div style={{ display: `${homeDisable}` }}>
-            {' '}
-            <Link style={style.textLight} to='/'>
-              <i className='fas fa-home'></i> Start
-            </Link>
-          </div>
-        </div>
-      </header>
-    </div>
+        <li style={{ display: `${homeDisable}` }}>
+          {' '}
+          <Link to='/' style={style.li}>
+            {/* <i className='fas fa-home'></i> */}
+             Start
+          </Link>
+        </li>
+        <li style={{ display: `${homeDisable}` }}>
+          {' '}
+          <Link to='/' style={style.li}>
+            {/* <i className='fas fa-user'></i> */}
+            Log<strong>In</strong>
+          </Link>
+        </li>
+        <li style={{ display: `${homeDisable}` }}>
+          {' '}
+          <Link to='/' style={style.li}>
+            {/* <i className='fas fa-heart'></i> */}
+             Log<strong>Out</strong> 
+          </Link>
+        </li>
+      </ul>
+    </nav>
   );
 };
 
 const style = {
   display: 'flex',
-  maxWidth: '100%',
-  justifyContent: 'space-around',
+  justifyContent: 'space-between',
   alignItems: 'center',
   alignContent: 'center',
-  background: '#0275d8',
-  textAlign: 'center',
+  background: '#fff',
+  color: '#2c405e',
+  fontWeight: 'bold',
+  boxShadow: '0 3px 6px rgba(0,0,0,0.1)',
   padding: '20px',
-  display: 'flex',
-  maxWidth: '100%',
-
-  textWhite: {
-    fontSize: '2.2rem',
-    marginRight: '3rem',
+  p: {
+    margin: 0,
+    fontSize: '1.5rem',
     fontWeight: 'bold',
-    color: 'white',
     maxWidth: '100%',
   },
-  textLight: {
-    fontSize: '1.4rem',
-    color: 'white',
-    maxWidth: '100%',
+  ul: {
+    display: 'flex',
+    justifyContent: 'scenter',
+    alignItems: 'center',
+    alignContent: 'center',
+    listStyleType: 'none',
+    margin: '0 20px',
+    color: '#2c405e',
+    fontWeight: 'normal',
   },
+
+  li:{
+  color:' #2c405e',
+  margin:'0 13px'
+  }
 };
 
 export default TopHeader;

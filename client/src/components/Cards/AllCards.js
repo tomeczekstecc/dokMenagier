@@ -60,7 +60,7 @@ const AllCards = (props) => {
   };
   return (
     <div>
-      <TopHeader title='Zarządzaj instrukcjami' icon='fas fa-folder-open' />
+      <TopHeader title='Zarządzaj instrukcjami' icon='fas fa-cog' />
 
       <h5 style={style.h3}>INSTRUKCJE DLA OPERATORA</h5>
       <div className='animated fadeIn' style={style}>

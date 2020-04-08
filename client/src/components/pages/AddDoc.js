@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Form, Input, Tooltip, Icon, Select, Button } from 'antd';
 import { useSnackbar } from 'notistack';
 import DocContext from '../../context/doc/docContext';
-import FileUpload from '../FileUpload';
+import FileUpload from '../layout/partials/FileUpload';
 import TopHeader from '../layout/partials/TopHeader';
 import CardAntPreview from '../layout/partials/CardAntPreview';
 
@@ -161,10 +161,10 @@ const AddDoc = (props) => {
           <CardAntPreview
             style={style.preview}
             body={body}
-            className='animated slideInLeft'
+
           />
           <Form
-            className='animated slideInRight'
+
             {...formItemLayout}
             onSubmit={handleSubmit}
             style={style.form}

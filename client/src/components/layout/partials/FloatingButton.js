@@ -65,11 +65,11 @@ FloatingButton.propTypes = {
 };
 FloatingButton.defaultProps = {
   scale: 1,
-  text: "Tekst",
-  color: "#0275d8",
-  icon: "fa-list",
-  position: "fixed",
-  p_marginTop: "10px",
+  text: 'Tekst',
+  color: '#2c405e',
+  icon: 'fa-list',
+  position: 'fixed',
+  p_marginTop: '10px',
 };
 
 export default FloatingButton;
