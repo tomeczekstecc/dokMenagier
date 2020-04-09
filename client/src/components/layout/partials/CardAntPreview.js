@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Card, Icon, Badge } from 'antd';
 import {Link} from 'react-router-dom'
 const { Meta } = Card;
@@ -40,7 +40,7 @@ const CardAntPreview = ({ body }) => {
             display: 'block',
             color: 'rgba(0,0,0,0.4)',
             fontSize: '1.8em',
-            zIndex: 1,
+
           }}
         ></i>
       </div>
@@ -54,7 +54,7 @@ const CardAntPreview = ({ body }) => {
           display: `${displayBadge}`,
         }}
       >
-        <a href='#' className='head-example' />
+ 
       </Badge>
       <Card
         style={style.main}

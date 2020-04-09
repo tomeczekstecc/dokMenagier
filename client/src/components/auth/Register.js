@@ -9,12 +9,12 @@ import {
   Select,
   Checkbox,
   Button,
-  AutoComplete,
+  // AutoComplete,
 
 } from 'antd';
 
 const { Option } = Select;
-const AutoCompleteOption = AutoComplete.Option;
+// const AutoCompleteOption = AutoComplete.Option;
 
 
 
@@ -73,7 +73,7 @@ class Register extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { autoCompleteResult } = this.state;
+    // const { autoCompleteResult } = this.state;
 
     const formItemLayout = {
       labelCol: {
@@ -106,9 +106,9 @@ class Register extends React.Component {
       </Select>,
     );
 
-    const websiteOptions = autoCompleteResult.map(website => (
-      <AutoCompleteOption key={website}>{website}</AutoCompleteOption>
-    ));
+    // const websiteOptions = autoCompleteResult.map(website => (
+    //   <AutoCompleteOption key={website}>{website}</AutoCompleteOption>
+    // ));
 
     return (
       <Form {...formItemLayout} onSubmit={this.handleSubmit}>
@@ -179,7 +179,7 @@ class Register extends React.Component {
             valuePropName: 'checked',
           })(
             <Checkbox>
-              I have read the <a href="">agreement</a>
+              I have read the <a href="/newdoc">agreement</a>
             </Checkbox>,
           )}
         </Form.Item>

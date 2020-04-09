@@ -97,9 +97,8 @@ const EditDoc = (props) => {
       body[e.target.id.split('edit_')[1]] = e.target.value;
     }
     console.log(body);
-    body.pdfFileName = `${
-      '[' + body.ver + ']' + '_' + body.shortTitle + '_' + body.target
-    }.pdf`;
+    //eslint-disable-next-line
+    body.pdfFileName = `${'[' + body.ver + ']' + '_' + body.shortTitle + '_' + body.target}.pdf`;
 
     if (
       body.title !== '' &&
@@ -167,16 +166,8 @@ const EditDoc = (props) => {
         <TopHeader title='Edycja dokumentu' icon='fas fa-file-signature' />
 
         <div style={style.container}>
-          <CardAntPreview
-            style={style.preview}
-            body={body}
-
-          />
-          <Form
-            {...formItemLayout}
-            onSubmit={handleSubmit}
-
-          >
+          <CardAntPreview style={style.preview} body={body} />
+          <Form {...formItemLayout} onSubmit={handleSubmit}>
             <Form.Item label='Tytuł' onChange={handleChange} hasFeedback>
               {getFieldDecorator(
                 'title',

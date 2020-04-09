@@ -5,7 +5,7 @@ import DocContext from '../../../context/doc/docContext';
 
 const FileUpload = ({ isSubmitting, setIsSubmitting, pdfFileName }) => {
   const docContext = useContext(DocContext);
-  const { transferDone, setTransferDone } = docContext;
+  const {  setTransferDone } = docContext;
   const [file, setFile] = useState('');
   const [filename, setFilename] = useState('Kliknij, aby dodać plik ');
   // eslint-disable-next-line
@@ -26,7 +26,8 @@ const FileUpload = ({ isSubmitting, setIsSubmitting, pdfFileName }) => {
     formData.append('file', file);
 
     try {
-      const res = await axios.post('/api/upload', formData, {
+      // const res =
+      await axios.post('/api/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           pdfName: `${pdfFileName}`,

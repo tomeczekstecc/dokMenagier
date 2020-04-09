@@ -46,7 +46,7 @@ const CardAnt = ({
             display: 'block',
             color: 'rgba(0,0,0,0.4)',
             fontSize: '1.8em',
-            zIndex: 1,
+
           }}
         ></i>
       </div>
@@ -59,7 +59,7 @@ const CardAnt = ({
           display: `${displayBadge}`,
         }}
       >
-        <a href='#' className='head-example' />
+
       </Badge>
       <Card
         style={style.main}

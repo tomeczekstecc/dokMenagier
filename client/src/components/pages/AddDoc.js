@@ -87,10 +87,8 @@ const AddDoc = (props) => {
     } else {
       body[e.target.id.split('register_')[1]] = e.target.value;
     }
-
-    body.pdfFileName = `${
-      '[' + body.ver + ']' + '_' + body.shortTitle + '_' + body.target
-    }.pdf`;
+    // eslint-disable-next-line
+    body.pdfFileName = `${'[' + body.ver + ']' + '_' + body.shortTitle + '_' + body.target}.pdf`;
 
     if (
       body.title !== '' &&
@@ -158,17 +156,8 @@ const AddDoc = (props) => {
         <TopHeader title='Dodawanie dokumentu' icon='fas fa-file-import' />
 
         <div style={style.container}>
-          <CardAntPreview
-            style={style.preview}
-            body={body}
-
-          />
-          <Form
-
-            {...formItemLayout}
-            onSubmit={handleSubmit}
-            style={style.form}
-          >
+          <CardAntPreview style={style.preview} body={body} />
+          <Form {...formItemLayout} onSubmit={handleSubmit} style={style.form}>
             <Form.Item label='Tytuł' onChange={handleChange} hasFeedback>
               {getFieldDecorator('title', {
                 rules: [
