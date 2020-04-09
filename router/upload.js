@@ -31,7 +31,7 @@ router.post('/', async (req, res) => {
     pass: process.env.FTP_PASS,
   });
 
-  setTimeout(() => copyToFtp(), 500);
+  setTimeout(() => copyToFtp(), 1000);
 
 
 
