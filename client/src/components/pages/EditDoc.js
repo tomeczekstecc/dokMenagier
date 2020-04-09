@@ -382,20 +382,13 @@ const EditDoc = (props) => {
             </Form.Item>
 
             <Form.Item onChange={handleChange} label='Dodaj plik' hasFeedback>
-              {getFieldDecorator('file', {
-                rules: [
-                  {
-                    required: true,
-                    message: 'Dodaj plik',
-                  },
-                ],
-              })(
+
                 <FileUpload
                   isSubmitting={isSubmitting}
                   setIsSubmitting={setIsSubmitting}
                   pdfFileName={body.pdfFileName}
                 />
-              )}
+
             </Form.Item>
 
             <Form.Item {...tailFormItemLayout}>

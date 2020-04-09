@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import MenuButton from '../partials/MenuButton';
 const TopHeader = (props) => {
   let homeDisable, allDocsDisable;
 
@@ -9,17 +9,39 @@ const TopHeader = (props) => {
   } else if (props.title === 'Strona startowa') {
     homeDisable = 'none';
   }
+
+  const [displayMenu, setDisplayMenu] = useState(true);
+
+  const handleClickMenuButton = () => {
+    setDisplayMenu(!displayMenu);
+  };
+
   return (
     <nav style={style}>
       <p style={style.p}>
         <i className={props.icon}></i> {props.title}
       </p>
 
-      <ul style={style.ul}>
+      <MenuButton handleClickMenuButton={handleClickMenuButton} />
+
+      <ul
+        style={{
+          display: `${displayMenu ? 'flex' : 'none'}`,
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          alignContent: 'center',
+          listStyleType: 'none',
+          margin: '0 20px',
+          color: '#2c405e',
+          fontWeight: 'normal',
+          padding: 0,
+
+        }}
+      >
         <li style={{ display: `${allDocsDisable}` }}>
           <Link style={style.li} to='/alldocs'>
             {/* <i className='fas fa-cog'></i> */}
-             Zarządzaj
+            Zarządzaj
           </Link>
         </li>
 
@@ -27,7 +49,7 @@ const TopHeader = (props) => {
           {' '}
           <Link to='/' style={style.li}>
             {/* <i className='fas fa-home'></i> */}
-             Start
+            Start
           </Link>
         </li>
         <li style={{ display: `${homeDisable}` }}>
@@ -41,7 +63,7 @@ const TopHeader = (props) => {
           {' '}
           <Link to='/' style={style.li}>
             {/* <i className='fas fa-heart'></i> */}
-             Log<strong>Out</strong> 
+            Log<strong>Out</strong>
           </Link>
         </li>
       </ul>
@@ -54,6 +76,8 @@ const style = {
   justifyContent: 'space-between',
   alignItems: 'center',
   alignContent: 'center',
+  flexWrap: 'wrap',
+
   background: '#fff',
   color: '#2c405e',
   fontWeight: 'bold',
@@ -66,20 +90,13 @@ const style = {
     maxWidth: '100%',
   },
   ul: {
-    display: 'flex',
-    justifyContent: 'scenter',
-    alignItems: 'center',
-    alignContent: 'center',
-    listStyleType: 'none',
-    margin: '0 20px',
-    color: '#2c405e',
-    fontWeight: 'normal',
+
   },
 
-  li:{
-  color:' #2c405e',
-  margin:'0 13px'
-  }
+  li: {
+    color: ' #2c405e',
+    margin: '0 13px',
+  },
 };
 
 export default TopHeader;

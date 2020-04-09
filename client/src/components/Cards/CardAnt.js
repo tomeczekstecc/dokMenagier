@@ -54,7 +54,7 @@ const CardAnt = ({
         count='NOWOŚĆ'
         style={{
           backgroundColor: '#db4d4d',
-          transform: 'translate(100px,40px) scale(1.1)',
+          transform: 'translate(40px,50px) scale(1.1)',
           zIndex: 10,
           display: `${displayBadge}`,
         }}
