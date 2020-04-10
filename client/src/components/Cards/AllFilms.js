@@ -6,10 +6,9 @@ import TopHeader from '../layout/partials/TopHeader';
 import { useSnackbar } from 'notistack';
 import { Divider } from 'antd';
 
-
 import FloatingButton from '../layout/partials/FloatingButton';
 
-const AllCards = (props) => {
+const AllPdfs = () => {
   const { enqueueSnackbar } = useSnackbar();
   const docContext = useContext(DocContext);
   const [loading, setLoading] = useState(true);
@@ -66,7 +65,12 @@ const AllCards = (props) => {
       <div id='type_cards_wrapper' className='animated fadeIn' style={style}>
         {docs !== null
           ? docs
-              .filter((item) => item.target === 'oper' && !item.archived)
+              .filter(
+                (item) =>
+                  item.target === 'oper' &&
+                  item.type === 'film' &&
+                  !item.archived
+              )
               .map((doc) => (
                 <CardAnt
                   handleOnClickDelete={handleOnClickDelete}
@@ -83,7 +87,12 @@ const AllCards = (props) => {
       <div id='type_cards_wrapper' className='animated fadeIn' style={style}>
         {docs !== null
           ? docs
-              .filter((item) => item.target === 'ben' && !item.archived)
+              .filter(
+                (item) =>
+                  item.target === 'ben' &&
+                  item.type === 'film' &&
+                  !item.archived
+              )
               .map((doc) => (
                 <CardAnt
                   handleOnClickDelete={handleOnClickDelete}
@@ -116,4 +125,4 @@ const style = {
   },
 };
 
-export default AllCards;
+export default AllPdfs;

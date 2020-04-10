@@ -128,7 +128,7 @@ const AddDoc = (props) => {
             enqueueSnackbar(`${res.data.msg}`, {
               variant: `${res.data.result}`,
             });
-            props.history.push('/alldocs');
+            props.history.push('/allpdfs');
           }, 4000);
         } else {
           enqueueSnackbar(`${res.data.msg}`, {
@@ -356,7 +356,7 @@ const AddDoc = (props) => {
                 Utwórz
               </Button>
 
-              <Link to='/alldocs'>
+              <Link to='/allpdfs'>
                 <Button
                   style={style.buttonR}
                   size='large'

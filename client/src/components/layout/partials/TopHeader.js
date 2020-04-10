@@ -38,10 +38,16 @@ const TopHeader = (props) => {
           padding: 0,
         }}
       >
-        <li style={{ display: `${allDocsDisable}` }}>
-          <Link style={style.li} to='/alldocs'>
+        <li>
+          <Link style={style.li} to='/allpdfs'>
             {/* <i className='fas fa-cog'></i> */}
-            Zarządzaj
+            PDF
+          </Link>
+        </li>
+        <li>
+          <Link style={style.li} to='/allfilms'>
+            {/* <i className='fas fa-cog'></i> */}
+            Filmy
           </Link>
         </li>
 

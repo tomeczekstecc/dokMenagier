@@ -2,7 +2,8 @@ import React from 'react';
 import DocState from './context/doc/DocState';
 import WrappedAddNewDocForm from './components/pages/AddDoc';
 import WrappedEditDocForm from './components/pages/EditDoc'
-import AllCards from './components/Cards/AllCards';
+import AllPdfs from './components/Cards/AllPdfs';
+import AllFilms from './components/Cards/AllFilms';
 import Home from './components/pages/Home';
 import Register from './components/auth/Register';
 import { SnackbarProvider } from 'notistack';
@@ -23,7 +24,8 @@ function App() {
                 path='/newdoc'
                 component={WrappedAddNewDocForm}
               ></Route>
-              Edit <Route exact path='/alldocs' component={AllCards}></Route>
+              <Route exact path='/allpdfs' component={AllPdfs}></Route>
+              <Route exact path='/allfilms' component={AllFilms}></Route>
               <Route
                 exact
                 path='/editdoc/:id'
