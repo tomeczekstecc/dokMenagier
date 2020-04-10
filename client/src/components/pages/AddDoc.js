@@ -156,7 +156,7 @@ const AddDoc = (props) => {
         <TopHeader title='Dodawanie dokumentu' icon='fas fa-file-import' />
 
         <div style={style.container}>
-          <CardAntPreview style={style.preview} body={body} />
+          <CardAntPreview id = 'card_ant_preview_container' style={style.preview} body={body} />
           <Form {...formItemLayout} onSubmit={handleSubmit} style={style.form}>
             <Form.Item label='Tytuł' onChange={handleChange} hasFeedback>
               {getFieldDecorator('title', {

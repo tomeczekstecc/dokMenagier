@@ -10,10 +10,11 @@ const TopHeader = (props) => {
     homeDisable = 'none';
   }
 
-  const [displayMenu, setDisplayMenu] = useState(true);
+  const [displayMenu, setDisplayMenu] = useState(false);
 
   const handleClickMenuButton = () => {
     setDisplayMenu(!displayMenu);
+    console.log(displayMenu);
   };
 
   return (
@@ -35,7 +36,6 @@ const TopHeader = (props) => {
           color: '#2c405e',
           fontWeight: 'normal',
           padding: 0,
-
         }}
       >
         <li style={{ display: `${allDocsDisable}` }}>
