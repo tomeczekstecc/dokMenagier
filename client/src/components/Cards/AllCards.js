@@ -63,7 +63,7 @@ const AllCards = (props) => {
       <TopHeader title='Zarządzanie' icon='fas fa-cog' />
 
       <h5 style={style.h3}>INSTRUKCJE DLA OPERATORA</h5>
-      <div className='animated fadeIn' style={style}>
+      <div id='type_cards_wrapper' className='animated fadeIn' style={style}>
         {docs !== null
           ? docs
               .filter((item) => item.target === 'oper' && !item.archived)
@@ -80,7 +80,7 @@ const AllCards = (props) => {
       </div>
       <Divider />
       <h5 style={style.h3}>INSTRUKCJE DLA BENEFICJENTA</h5>
-      <div className='animated fadeIn' style={style}>
+      <div id='type_cards_wrapper' className='animated fadeIn' style={style}>
         {docs !== null
           ? docs
               .filter((item) => item.target === 'ben' && !item.archived)
@@ -110,6 +110,7 @@ const style = {
   display: 'flex',
   flexWrap: 'wrap',
   justifyContent: 'flex-start',
+
   h3: {
     margin: '30px 0px -30px 30px',
   },
