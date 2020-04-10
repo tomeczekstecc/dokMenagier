@@ -163,7 +163,7 @@ const EditDoc = (props) => {
   return (
     <>
       <div style={style.main}>
-        <TopHeader title='Edycja dokumentu' icon='fas fa-file-signature' />
+        <TopHeader title='Edycja' icon='fas fa-file-signature' />
 
         <div style={style.container}>
           <CardAntPreview style={style.preview} body={body} />

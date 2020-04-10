@@ -153,7 +153,7 @@ const AddDoc = (props) => {
   return (
     <>
       <div style={style.main}>
-        <TopHeader title='Dodawanie dokumentu' icon='fas fa-file-import' />
+        <TopHeader title='Dodawanie' icon='fas fa-file-import' />
 
         <div style={style.container}>
           <CardAntPreview id = 'card_ant_preview_container' style={style.preview} body={body} />

@@ -4,9 +4,9 @@ import MenuButton from '../partials/MenuButton';
 const TopHeader = (props) => {
   let homeDisable, allDocsDisable;
 
-  if (props.title === 'Zarządzaj instrukcjami') {
+  if (props.title === 'Zarządzanie') {
     allDocsDisable = 'none';
-  } else if (props.title === 'Strona startowa') {
+  } else if (props.title === 'Start') {
     homeDisable = 'none';
   }
 
@@ -52,14 +52,14 @@ const TopHeader = (props) => {
             Start
           </Link>
         </li>
-        <li style={{ display: `${homeDisable}` }}>
+        <li >
           {' '}
           <Link to='/' style={style.li}>
             {/* <i className='fas fa-user'></i> */}
             Log<strong>In</strong>
           </Link>
         </li>
-        <li style={{ display: `${homeDisable}` }}>
+        <li>
           {' '}
           <Link to='/' style={style.li}>
             {/* <i className='fas fa-heart'></i> */}

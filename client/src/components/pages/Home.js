@@ -5,7 +5,7 @@ import TopHeader from '../layout/partials/TopHeader'
 const Home = () => {
   return (
     <>
-    <TopHeader title='Strona startowa' icon='fas fa-home'/>
+    <TopHeader title='Start' icon='fas fa-home'/>
     <div style={style.main}>
       <div style={style.item}>
         <FloatingButton

@@ -78,7 +78,9 @@ ul li:hover {
   transform: scale(1.04);
 }
 
-
+.animated.fadeIn{
+max-width: 100% !important;
+}
 
 
 
