@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Doc = require('../models/Doc');
+const Pdf = require('../models/Pdf');
 const jsftp = require('jsftp');
 const fs = require('fs');
 const path = require('path');

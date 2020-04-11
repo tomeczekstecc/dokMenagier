@@ -1,11 +1,10 @@
 import React from 'react';
-import DocState from './context/doc/DocState';
-import WrappedAddNewDocForm from './components/pages/AddDoc';
-import WrappedEditDocForm from './components/pages/EditDoc'
+import PdfState from './context/pdf/PdfState';
+import WrappedAddNewPdfForm from './components/pages/AddPdf';
+import WrappedEditPdfForm from './components/pages/EditPdf'
 import AllPdfs from './components/Cards/AllPdfs';
 import AllFilms from './components/Cards/AllFilms';
 import Home from './components/pages/Home';
-import Register from './components/auth/Register';
 import { SnackbarProvider } from 'notistack';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 require('dotenv/config');
@@ -14,26 +13,26 @@ function App() {
   return (
     <SnackbarProvider maxSnack={3} autoHideDuration={process.env.ALERT_WAIT_TIME}>
       <div className='App'>
-        <DocState>
+        <PdfState>
           <Router>
             <Switch>
               <Route exact path='/' component={Home}></Route>
-              <Route exact path='/register' component={Register}></Route>
+
               <Route
                 exact
-                path='/newdoc'
-                component={WrappedAddNewDocForm}
+                path='/newpdf'
+                component={WrappedAddNewPdfForm}
               ></Route>
               <Route exact path='/allpdfs' component={AllPdfs}></Route>
               <Route exact path='/allfilms' component={AllFilms}></Route>
               <Route
                 exact
-                path='/editdoc/:id'
-                component={WrappedEditDocForm}
+                path='/editpdf/:id'
+                component={WrappedEditPdfForm}
               ></Route>
             </Switch>
           </Router>
-        </DocState>
+        </PdfState>
       </div>
     </SnackbarProvider>
   );

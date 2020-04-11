@@ -1,5 +1,4 @@
-export const GET_DOCS = 'GET_DOCS'
-export const SET_COVER = 'SET_COVER'
-export const SET_CURRENT_DOC = 'SET_CURRENT_DOC';
+export const GET_PDFS = 'GET_PDFS'
+export const SET_CURRENT_PDF = 'SET_CURRENT_PDF';
 export const SET_TRANSFER_DONE = 'SET_TRANSFER_DONE';
 export const SET_ALL_READY = 'SET_ALL_READY';

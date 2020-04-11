@@ -11,7 +11,7 @@ const Home = () => {
         <FloatingButton
           scale={2}
           text="Zarządzaj"
-          linkTo="alldocs"
+          linkTo="allpdfs"
           position="relative"
           p_marginTop='60px'
         />
@@ -22,7 +22,7 @@ const Home = () => {
         <FloatingButton
           scale={2}
           text="Dodaj"
-          linkTo="newdoc"
+          linkTo="newpdf"
           position="relative"
           p_marginTop='60px'
         />

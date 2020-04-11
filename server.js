@@ -33,8 +33,7 @@ app.use(express.urlencoded({ extended: true }));
 // });
 
 app.use("/api/auth", require("./router/auth"));
-app.use("/api/pin", require("./router/pin"));
-app.use("/api/docs", require("./router/docs"));
+app.use("/api/pdfs", require("./router/pdfs"));
 app.use("/api/upload", require("./router/upload"));
 
 const PORT = process.env.PORT || 5000;

@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from 'react';
-import CardAnt from './CardAnt';
+import CardPdf from './CardPdf';
 import axios from 'axios';
-import DocContext from '../../context/doc/docContext';
+import PdfContext from '../../context/pdf/pdfContext';
 import TopHeader from '../layout/partials/TopHeader';
 import { useSnackbar } from 'notistack';
 import { Divider } from 'antd';
@@ -10,22 +10,22 @@ import FloatingButton from '../layout/partials/FloatingButton';
 
 const AllPdfs = () => {
   const { enqueueSnackbar } = useSnackbar();
-  const docContext = useContext(DocContext);
+  const pdfContext = useContext(PdfContext);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getDocs();
+    getPdfs();
     setLoading(false);
     //eslint-disable-next-line
   }, [loading]);
 
-  const { docs, getDocs } = docContext;
+  const { pdfs, getPdfs } = pdfContext;
 
   const handleOnClickDelete = async (id) => {
     setLoading(true);
 
     try {
-      await axios.delete(`/api/docs/${id}`).then((res) => {
+      await axios.delete(`/api/pdfs/${id}`).then((res) => {
         enqueueSnackbar(`${res.data.msg}`, {
           variant: `${res.data.result}`,
         });
@@ -41,7 +41,7 @@ const AllPdfs = () => {
     console.log(loading);
 
     try {
-      await axios.put(`/api/docs/${direction}/${id}`).then((res) => {
+      await axios.put(`/api/pdfs/${direction}/${id}`).then((res) => {
         if (res.data.msg === undefined) {
           enqueueSnackbar(`Dokonano zmian`, {
             variant: `info`,
@@ -63,21 +63,21 @@ const AllPdfs = () => {
 
       <h5 style={style.h3}>INSTRUKCJE DLA OPERATORA</h5>
       <div id='type_cards_wrapper' className='animated fadeIn' style={style}>
-        {docs !== null
-          ? docs
+        {pdfs !== null
+          ? pdfs
               .filter(
                 (item) =>
                   item.target === 'oper' &&
                   item.type === 'pdf' &&
                   !item.archived
               )
-              .map((doc) => (
-                <CardAnt
+              .map((pdf) => (
+                <CardPdf
                   handleOnClickDelete={handleOnClickDelete}
                   handleOnClickChangeSort={handleOnClickChangeSort}
                   loading={loading}
-                  key={doc._id}
-                  doc={doc}
+                  key={pdf._id}
+                  pdf={pdf}
                 />
               ))
           : null}
@@ -85,19 +85,19 @@ const AllPdfs = () => {
       <Divider />
       <h5 style={style.h3}>INSTRUKCJE DLA BENEFICJENTA</h5>
       <div id='type_cards_wrapper' className='animated fadeIn' style={style}>
-        {docs !== null
-          ? docs
+        {pdfs !== null
+          ? pdfs
               .filter(
                 (item) =>
                   item.target === 'ben' && item.type === 'pdf' && !item.archived
               )
-              .map((doc) => (
-                <CardAnt
+              .map((pdf) => (
+                <CardPdf
                   handleOnClickDelete={handleOnClickDelete}
                   handleOnClickChangeSort={handleOnClickChangeSort}
                   loading={loading}
-                  key={doc._id}
-                  doc={doc}
+                  key={pdf._id}
+                  pdf={pdf}
                 />
               ))
           : null}
@@ -105,7 +105,7 @@ const AllPdfs = () => {
       <FloatingButton
         scale={1}
         text='Dodaj'
-        linkTo='newdoc'
+        linkTo='newpdf'
         position='fixed'
         p_marginTop='10px'
       />

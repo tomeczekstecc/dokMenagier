@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from 'react';
-import CardAnt from './CardAnt';
+import CardPdf from './CardPdf';
 import axios from 'axios';
-import DocContext from '../../context/doc/docContext';
+import DocContext from '../../context/pdf/pdfContext';
 import TopHeader from '../layout/partials/TopHeader';
 import { useSnackbar } from 'notistack';
 import { Divider } from 'antd';
@@ -72,7 +72,7 @@ const AllPdfs = () => {
                   !item.archived
               )
               .map((doc) => (
-                <CardAnt
+                <CardPdf
                   handleOnClickDelete={handleOnClickDelete}
                   handleOnClickChangeSort={handleOnClickChangeSort}
                   loading={loading}
@@ -94,7 +94,7 @@ const AllPdfs = () => {
                   !item.archived
               )
               .map((doc) => (
-                <CardAnt
+                <CardPdf
                   handleOnClickDelete={handleOnClickDelete}
                   handleOnClickChangeSort={handleOnClickChangeSort}
                   loading={loading}

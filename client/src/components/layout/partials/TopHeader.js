@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import MenuButton from '../partials/MenuButton';
 const TopHeader = (props) => {
-  let homeDisable, allDocsDisable;
+  let homeDisable, allPdfsDisable;
 
   if (props.title === 'Zarządzanie') {
-    allDocsDisable = 'none';
+    allPdfsDisable = 'none';
   } else if (props.title === 'Start') {
     homeDisable = 'none';
   }

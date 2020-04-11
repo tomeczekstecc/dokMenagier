@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import Progress from './Progress';
-import DocContext from '../../../context/doc/docContext';
+import DocContext from '../../../context/pdf/pdfContext';
 
 const FileUpload = ({ isSubmitting, setIsSubmitting, pdfFileName }) => {
   const docContext = useContext(DocContext);

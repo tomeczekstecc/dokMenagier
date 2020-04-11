@@ -27,7 +27,7 @@ align-items: center;  font-family: 'apple-system', 'BlinkMacSystemFont', 'Segoe 
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !important;
 }
 
-#card_ant_preview {
+#card_pdf_preview {
   transition: all 0.1s ease-in-out !important;
 
   justify-self: self-end !important;
@@ -41,7 +41,7 @@ align-items: center;  font-family: 'apple-system', 'BlinkMacSystemFont', 'Segoe 
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !important;
 }
 
-#card_ant:hover {
+#card_pdf:hover {
   transform: translateY(-5px);
 }
 
@@ -119,7 +119,7 @@ label[name='Wybierz plik']{
     align-items: center !important;
   }
 
-  #card_ant_preview {
+  #card_pdf_preview {
     transform: scale(1) !important;
     margin-top: 0px !important;
   }
@@ -140,7 +140,7 @@ label[name='Wybierz plik']{
   }
 
 
-  #card_ant {
+  #card_pdf {
     display: block !important;
     margin: 0 auto !important;
 
