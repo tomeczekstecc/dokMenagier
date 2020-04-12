@@ -9,7 +9,7 @@ const PdfSchema = mongoose.Schema({
   type: {
     type: String,
     default: 'pdf',
-    enum: ['pdf', 'film']
+
   },
   target: {
     type: String,

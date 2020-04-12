@@ -10,7 +10,7 @@ import CardPdfPreview from '../layout/partials/CardPdfPreview';
 
 const { Option } = Select;
 
-const EditPdf = (props) => {
+const AddOrEditPdf = (props) => {
   const { id } = props.match.params;
   const pdfContext = useContext(PdfContext);
   const { curPdf, setAllReady } = pdfContext;
@@ -20,18 +20,29 @@ const EditPdf = (props) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [pending, setPending] = useState(false);
 
-  let {
-    title,
-    type,
-    target,
-    shortTitle,
-    publishDate,
-    ver,
-    prevVer,
-    pagesCount,
-    premiereTag,
-    archived,
-  } = curPdf[0];
+  let title = '',
+    type = '',
+    target = '',
+    shortTitle = 'Test',
+    publishDate = '',
+    ver = '',
+    prevVer = '',
+    pagesCount = '',
+    premiereTag = '',
+    archived = '';
+
+  if (curPdf!==null) {
+    title = curPdf[0].title;
+    type = curPdf[0].type;
+    target = curPdf[0].target;
+    shortTitle = curPdf[0].shortTitle;
+    publishDate = curPdf[0].publishDate;
+    ver = curPdf[0].ver;
+    prevVer = curPdf[0].prevVer;
+    pagesCount = curPdf[0].pagesCount;
+    premiereTag = curPdf[0].premiereTag;
+    archived = curPdf[0].archived;
+  }
 
   let convPremiereTag, convArchived;
 
@@ -53,7 +64,7 @@ const EditPdf = (props) => {
     archived,
   });
 
-  console.log(title);
+  console.log(body);
 
   const { getFieldDecorator } = props.form;
 
@@ -173,9 +184,8 @@ const EditPdf = (props) => {
             <Form.Item label='Tytuł' onChange={handleChange} hasFeedback>
               {getFieldDecorator(
                 'title',
-
+                { initialValue: title },
                 {
-                  initialValue: title,
                   rules: [
                     {
                       min: 3,
@@ -196,15 +206,18 @@ const EditPdf = (props) => {
             </Form.Item>
 
             <Form.Item label='Typ instrukcji' hasFeedback>
-              {getFieldDecorator('type', {
-                initialValue: type,
-                rules: [
-                  {
-                    required: true,
-                    message: 'Musisz wybrać wartosć',
-                  },
-                ],
-              })(
+              {getFieldDecorator(
+                'type',
+                { initialValue: type },
+                {
+                  rules: [
+                    {
+                      required: true,
+                      message: 'Musisz wybrać wartosć',
+                    },
+                  ],
+                }
+              )(
                 <Select onChange={handleChange} style={{ width: 175 }}>
                   <Option value='pdf'>PDF</Option>
                   <Option value='film'>Film</Option>
@@ -215,8 +228,8 @@ const EditPdf = (props) => {
             <Form.Item label='Dla kogo' hasFeedback>
               {getFieldDecorator(
                 'target',
-
-                {initialValue: target,
+                { initialValue: target },
+                {
                   rules: [
                     {
                       required: true,
@@ -235,8 +248,8 @@ const EditPdf = (props) => {
             <Form.Item label='Krótki tytuł' onChange={handleChange} hasFeedback>
               {getFieldDecorator(
                 'shortTitle',
-
-                {initialValue: shortTitle,
+                { initialValue: shortTitle },
+                {
                   rules: [
                     {
                       min: 3,
@@ -266,8 +279,8 @@ const EditPdf = (props) => {
             >
               {getFieldDecorator(
                 'publishDate',
-
-                {initialValue: publishDate,
+                { initialValue: publishDate },
+                {
                   rules: [
                     {
                       required: true,
@@ -292,8 +305,8 @@ const EditPdf = (props) => {
             <Form.Item label='Wersja' onChange={handleChange} hasFeedback>
               {getFieldDecorator(
                 'ver',
-
-                {initialValue: ver,
+                { initialValue: ver },
+                {
                   rules: [
                     {
                       required: true,
@@ -312,8 +325,8 @@ const EditPdf = (props) => {
             >
               {getFieldDecorator(
                 'prevVer',
-
-                {initialValue: prevVer ,
+                { initialValue: prevVer },
+                {
                   rules: [
                     {
                       required: true,
@@ -328,8 +341,8 @@ const EditPdf = (props) => {
             <Form.Item onChange={handleChange} label='Liczba stron' hasFeedback>
               {getFieldDecorator(
                 'pagesCount',
-
-                {initialValue: pagesCount,
+                { initialValue: pagesCount },
+                {
                   rules: [
                     {
                       required: true,
@@ -344,8 +357,8 @@ const EditPdf = (props) => {
             <Form.Item label='Oznacz jako premierowe' hasFeedback>
               {getFieldDecorator(
                 'premiereTag',
-
-                {initialValue: convPremiereTag,
+                { initialValue: convPremiereTag },
+                {
                   rules: [
                     {
                       required: true,
@@ -364,8 +377,8 @@ const EditPdf = (props) => {
             <Form.Item label='Oznacz jako archiwalne' hasFeedback>
               {getFieldDecorator(
                 'archived',
-
-                {initialValue: convArchived,
+                { initialValue: convArchived },
+                {
                   rules: [
                     {
                       required: true,
@@ -439,5 +452,7 @@ const style = {
   },
 };
 
-const WrappedEditPdfForm = Form.create({ name: 'edit' })(EditPdf);
-export default WrappedEditPdfForm;
+const WrappedAddOrEditPdfForm = Form.create({ name: 'addOraEditPdf' })(
+  AddOrEditPdf
+);
+export default WrappedAddOrEditPdfForm;

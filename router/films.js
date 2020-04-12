@@ -1,24 +1,24 @@
 const express = require('express');
 const router = express.Router();
-const Pdf = require('../models/Pdf');
+const Film = require('../models/Film');
 
-// Get all pdfs
+// Get all films
 router.get('/', async (req, res) => {
   try {
-    const pdfs = await Pdf.find().sort({ order: 1 });
+    const films = await Film.find().sort({ order: 1 });
 
-    if (pdfs.length === 0) {
+    if (films.length === 0) {
       return res.status(400).json({
         result: 'warning',
-        msg: 'Brak pdf do wyświetlenia',
+        msg: 'Brak filmów do wyświetlenia',
       });
     }
 
     res.status(200).json({
       result: 'success',
-      msg: 'Pobrano informacje o wszystkich pdf.',
-      count: pdfs.length,
-      data: pdfs,
+      msg: 'Pobrano informacje o wszystkich filmach.',
+      count: films.length,
+      data: films,
     });
   } catch (error) {
     console.log(error);
@@ -30,23 +30,24 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Get one pdf
+// Get one film
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
 
   try {
-    const pdf = await Pdf.findById(id);
-    if (pdf === null) {
+    const film = await Film.findById(id);
+
+    if (film === null) {
       return res.status(400).json({
         result: 'warning',
-        msg: 'Brak pdf o takim id',
+        msg: 'Brak filmu o takim id',
       });
     }
 
     res.status(200).json({
       result: 'success',
-      msg: 'Pobrano informacje o pdf.',
-      data: pdf,
+      msg: 'Pobrano informacje o filmie.',
+      data: film,
     });
   } catch (error) {
     console.log(error);
@@ -58,67 +59,40 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// create a pdf
+// create a film
 router.post('/', async (req, res) => {
-  const {
-    title,
-    target,
-    shortTitle,
-    publishDate,
-    ver,
-    pagesCount,
-    prevVer,
-    premiereTag,
-    archived,
-  } = req.body;
+  const { title, target, linkYT, premiereTag, archived } = req.body;
 
   try {
     if (
       title === '' ||
-      title === undefined ||
       target === '' ||
-      target === undefined ||
-      shortTitle === '' ||
-      shortTitle === undefined ||
-      publishDate === '' ||
-      publishDate === undefined ||
-      ver === '' ||
-      ver === undefined ||
-      pagesCount === '' ||
-      pagesCount === undefined ||
-      prevVer === '' ||
-      prevVer === undefined ||
+      linkYT === '' ||
       premiereTag === '' ||
-      premiereTag === undefined ||
-      archived === '' ||
-      archived === undefined
+      archived === ''
     ) {
       return res.json({
         result: 'error',
         msg: 'Nie uzupełniono wszystkich wymaganych pól.',
       });
     }
-    const allTypepdfs = await Pdf.find({ target, archived });
+    const allTypefilms = await Film.find({ target, archived });
 
     const requiredFields = {
       title,
 
       target,
-      shortTitle,
-      publishDate,
-      ver,
-      pagesCount,
-      prevVer,
+      linkYT,
       premiereTag,
       archived,
-      order: allTypepdfs.length + 1,
+      order: allTypefilms.length + 1,
     };
 
-    await Pdf.create(requiredFields);
+    await Film.create(requiredFields);
 
     return res.json({
       result: 'success',
-      msg: 'Utworzono nową instrukcję.',
+      msg: 'Utworzono nowy film.',
     });
   } catch (error) {
     console.log(error);
@@ -129,129 +103,134 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   const { id } = req.params;
-  const {
+  const { title, target, linkYT, premiereTag, archived } = req.body;
+
+  const newFilm = {
     title,
-
     target,
-    shortTitle,
-    publishDate,
-    ver,
-    pagesCount,
-    prevVer,
-    premiereTag,
-    archived,
-  } = req.body;
-
-  const newPdf = {
-    title,
-
-    target,
-    shortTitle,
-    publishDate,
-    ver,
-    pagesCount,
-    prevVer,
+    linkYT,
     premiereTag,
     archived,
   };
   try {
-    await Pdf.findByIdAndUpdate(id, newPdf);
-    const updatedPdf = await Pdf.findById(id);
-
-    if (!updatedPdf) {
-      return res.status(400).json({
-        result: 'warning',
-        msg: 'Brak pdf o wybranym id',
+    console.log(title);
+    if (
+      title === '' ||
+      title === undefined ||
+      target === '' ||
+      target === undefined ||
+      linkYT === '' ||
+      linkYT === undefined ||
+      premiereTag === '' ||
+      premiereTag === undefined ||
+      archived === '' ||
+      archived === undefined
+    ) {
+      return res.json({
+        result: 'error',
+        msg: 'Nie uzupełniono wszystkich wymaganych pól.',
       });
     }
+
+    const updatedFilm = await Film.findByIdAndUpdate(id, newFilm);
+
+    if (!updatedFilm) {
+      return res.status(400).json({
+        result: 'warning',
+        msg: 'Brak filmu o wybranym id',
+      });
+    }
+
+    // const updatedFilm = await Film.findById(id);
     return res.json({
       result: 'success',
-      msg: 'Zmodyfikowano pdf.',
-      data: updatedPdf,
+      msg: 'Zmodyfikowano film',
+      data: updatedFilm,
     });
   } catch (error) {
     console.log(error);
   }
 });
 
-//delete Pdf
+//delete Film
 router.delete('/:id', async (req, res) => {
   const { id } = req.params;
-  const pdf = await Pdf.find({ _id: id });
-  if (pdf.length === 0) {
+  const film = await Film.find({ _id: id });
+
+  if (film.length === 0) {
     return res.json({
       result: 'error',
-      msg: 'Brak pdf podanym id.',
+      msg: 'Brak filmu o podanym id.',
     });
   } else {
-    await Pdf.findByIdAndRemove(id);
+    await Film.findByIdAndRemove(id);
     return res.json({
       result: 'success',
-      msg: 'Usunięto pdf.',
+      msg: 'Usunięto film.',
     });
   }
 });
 
 //@route PUT /add/:id
-//@desc Add to sort of pdf
+//@desc Add to sort of film
 //@auth private
 
 router.put('/add/:id', async (req, res) => {
   try {
-    const curPdf = await Pdf.findById(req.params.id);
+    const curFilm = await Film.findById(req.params.id);
 
-    const { target, archived } = curPdf;
+    const { target, archived } = curFilm;
 
-    const allTypepdfs = await Pdf.find({ target, archived });
+    const allTypefilms = await Film.find({ target, archived });
 
-    if (curPdf.order === allTypepdfs.length) {
+    if (curFilm.order === allTypefilms.length) {
       return res.json({
         result: 'error',
         msg: 'Nie można przesunąć ostatniego elementu w dół !!!',
       });
     }
 
-    const curOrder = curPdf.order;
+    const curOrder = curFilm.order;
 
-    let upPdf = await Pdf.findOneAndUpdate(
+    let upFilm = await Film.findOneAndUpdate(
       { order: curOrder + 1, target, archived },
       { $set: { order: curOrder } }
     );
 
-    const newCurPdf = await Pdf.findByIdAndUpdate(req.params.id, {
+    const newCurFilm = await Film.findByIdAndUpdate(req.params.id, {
       $set: {
         order: curOrder + 1,
       },
     });
 
-    res.json(upPdf);
+    res.json(upFilm);
   } catch (err) {
     console.log(err.message);
   }
 });
 router.put('/substract/:id', async (req, res) => {
   try {
-    const curPdf = await Pdf.findById(req.params.id);
+    const curFilm = await Film.findById(req.params.id);
 
-    const { target, archived } = curPdf;
+    const { target, archived } = curFilm;
 
-    const allTypepdfs = await Pdf.find({ target, archived });
+    const allTypefilms = await Film.find({ target, archived });
 
-    if (curPdf.order === 1) {
+    if (curFilm.order === 1) {
       return res.json({
         result: 'error',
         msg: 'Nie można przesunąć pierwszego elementu w górę!!!',
       });
     }
 
-    const curOrder = curPdf.order;
+    const curOrder = curFilm.order;
 
-    let upPdf = await Pdf.findOneAndUpdate(
+    let upFilm = await Film.findOneAndUpdate(
       { order: curOrder - 1, target, archived },
       { $set: { order: curOrder } }
     );
 
-    const newCurPdf = await Pdf.findByIdAndUpdate(req.params.id, {
+    const newCurFilm = await Film.findByIdAndUpdate(req.params.id, {
       $set: {
         order: curOrder - 1,
       },
