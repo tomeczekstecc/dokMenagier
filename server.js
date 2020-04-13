@@ -24,18 +24,22 @@ app.use(
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// app.get('/*', function (req, res) {
-//   res.sendFile(path.join(__dirname, 'client/public/index.html'), function (err) {
-//     if (err) {
-//       res.status(500).send(err);
-//     }
-//   });
-// });
+
+
 
 app.use("/api/auth", require("./router/auth"));
 app.use("/api/pdfs", require("./router/pdfs"));
 app.use("/api/films", require("./router/films"));
 app.use("/api/upload", require("./router/upload"));
+
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'client/public/index.html'), function (err) {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
+
 
 const PORT = process.env.PORT || 5000;
 
