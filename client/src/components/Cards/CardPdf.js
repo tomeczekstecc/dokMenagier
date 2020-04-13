@@ -89,7 +89,7 @@ const CardPdf = ({
             key='arrow-down'
             onClick={() => handleOnClickChangeSort(pdf._id, 'add')}
           />,
-          <Link to={`/editpdf/${pdf._id}`} onClick={() => setCurPdf(pdf._id)}>
+          <Link to={`/editpdf`} onClick={() => setCurPdf(pdf._id)}>
             <Icon type='edit' key='edit' />
           </Link>,
 

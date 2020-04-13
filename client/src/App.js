@@ -27,7 +27,7 @@ function App() {
               <Route exact path='/allfilms' component={AllFilms}></Route>
               <Route
                 exact
-                path='/editpdf/:id'
+                path='/editpdf'
                 component={WrappedEditPdfForm}
               ></Route>
             </Switch>
