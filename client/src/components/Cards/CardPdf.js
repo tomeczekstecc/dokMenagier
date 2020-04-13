@@ -21,15 +21,11 @@ const CardPdf = ({
   } else {
     displayBadge = 'block';
   }
-  let iconType = 'none';
-  if (pdf.type === 'pdf') {
-    iconType = 'far fa-file-pdf';
-  } else {
-    iconType = 'far fa-file-video';
-  }
+
+  let iconType = 'far fa-file-pdf';
 
   return (
-    <div id='card_ant'
+    <div id='card_ant_pdf'
       style={{
         zIndex: -2,
         fontFamily:

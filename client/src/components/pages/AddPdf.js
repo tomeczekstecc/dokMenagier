@@ -150,7 +150,7 @@ if (e === 'ben' || e === 'oper') {
   return (
     <>
       <div style={style.main}>
-        <TopHeader title='Dodawanie' icon='fas fa-file-import' />
+        <TopHeader title='Dodawanie PDF' icon='fas fa-file-import' />
 
         <div style={style.container}>
           <CardPdfPreview id = 'card_pdf_preview_container' style={style.preview} body={body} />

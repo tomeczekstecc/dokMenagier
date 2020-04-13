@@ -41,9 +41,26 @@ align-items: center;  font-family: 'apple-system', 'BlinkMacSystemFont', 'Segoe 
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !important;
 }
 
-#card_pdf:hover {
-  transform: translateY(-5px);
+#card_pdf:hover, #card_ant_film:hover,.ant-card.ant-card-bordered {
+
+  box-shadow: 1px 1px 20px 5px rgba(0,0,0,0.75)
 }
+
+#card_film_preview  {
+ transition: all 0.1s ease-in-out !important;
+
+  justify-self: self-end !important;
+  margin-right: 5px !important;
+  transform: scale(1.1) !important;
+  margin-top: 30px !important;
+  overflow: hidden;
+
+  font-family: 'apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto',
+    'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !important;
+}
+
+
 
 .ant-form.ant-form-horizontal {
   justify-self: self-start;
@@ -93,6 +110,20 @@ input[type='file']{
 label[name='Wybierz plik']{
   margin-top: 40px;
 }
+
+
+
+#card_ant_film .ant-card-body{
+height: 60px;
+padding: 20px;
+}
+
+
+
+
+
+
+
 
 @media (max-width: 768px) {
   .burger {

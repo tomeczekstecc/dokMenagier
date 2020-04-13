@@ -1,31 +1,31 @@
 import React, { useEffect, useContext, useState } from 'react';
-import CardPdf from './CardPdf';
+import CardFilm from './CardFilm';
 import axios from 'axios';
-import DocContext from '../../context/pdf/pdfContext';
+import FilmContext from '../../context/film/filmContext';
 import TopHeader from '../layout/partials/TopHeader';
 import { useSnackbar } from 'notistack';
 import { Divider } from 'antd';
 
 import FloatingButton from '../layout/partials/FloatingButton';
 
-const AllPdfs = () => {
+const AllFilms = () => {
   const { enqueueSnackbar } = useSnackbar();
-  const docContext = useContext(DocContext);
+  const filmContext = useContext(FilmContext);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getDocs();
+    getFilms();
     setLoading(false);
     //eslint-disable-next-line
   }, [loading]);
 
-  const { docs, getDocs } = docContext;
+  const { films, getFilms } = filmContext;
 
   const handleOnClickDelete = async (id) => {
     setLoading(true);
 
     try {
-      await axios.delete(`/api/docs/${id}`).then((res) => {
+      await axios.delete(`/api/films/${id}`).then((res) => {
         enqueueSnackbar(`${res.data.msg}`, {
           variant: `${res.data.result}`,
         });
@@ -41,7 +41,7 @@ const AllPdfs = () => {
     console.log(loading);
 
     try {
-      await axios.put(`/api/docs/${direction}/${id}`).then((res) => {
+      await axios.put(`/api/films/${direction}/${id}`).then((res) => {
         if (res.data.msg === undefined) {
           enqueueSnackbar(`Dokonano zmian`, {
             variant: `info`,
@@ -63,21 +63,21 @@ const AllPdfs = () => {
 
       <h5 style={style.h3}>INSTRUKCJE DLA OPERATORA</h5>
       <div id='type_cards_wrapper' className='animated fadeIn' style={style}>
-        {docs !== null
-          ? docs
+        {films !== null
+          ? films
               .filter(
                 (item) =>
                   item.target === 'oper' &&
                   item.type === 'film' &&
                   !item.archived
               )
-              .map((doc) => (
-                <CardPdf
+              .map((film) => (
+                <CardFilm
                   handleOnClickDelete={handleOnClickDelete}
                   handleOnClickChangeSort={handleOnClickChangeSort}
                   loading={loading}
-                  key={doc._id}
-                  doc={doc}
+                  key={film._id}
+                  film={film}
                 />
               ))
           : null}
@@ -85,21 +85,19 @@ const AllPdfs = () => {
       <Divider />
       <h5 style={style.h3}>INSTRUKCJE DLA BENEFICJENTA</h5>
       <div id='type_cards_wrapper' className='animated fadeIn' style={style}>
-        {docs !== null
-          ? docs
+        {films !== null
+          ? films
               .filter(
                 (item) =>
-                  item.target === 'ben' &&
-                  item.type === 'film' &&
-                  !item.archived
+                  item.target === 'ben' && item.type === 'film' && !item.archived
               )
-              .map((doc) => (
-                <CardPdf
+              .map((film) => (
+                <CardFilm
                   handleOnClickDelete={handleOnClickDelete}
                   handleOnClickChangeSort={handleOnClickChangeSort}
                   loading={loading}
-                  key={doc._id}
-                  doc={doc}
+                  key={film._id}
+                  film={film}
                 />
               ))
           : null}
@@ -107,7 +105,7 @@ const AllPdfs = () => {
       <FloatingButton
         scale={1}
         text='Dodaj'
-        linkTo='newdoc'
+        linkTo='newfilm'
         position='fixed'
         p_marginTop='10px'
       />
@@ -125,4 +123,4 @@ const style = {
   },
 };
 
-export default AllPdfs;
+export default AllFilms;

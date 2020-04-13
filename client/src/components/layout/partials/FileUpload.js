@@ -39,7 +39,7 @@ const FileUpload = ({ isSubmitting, setIsSubmitting, pdfFileName }) => {
                 Math.round((ProgressEvent.loaded * 100) / ProgressEvent.total)
               )
             );
-            setTimeout(() => setUploadProcentage(0), 3000);
+            setTimeout(() => setUploadProcentage(0), 5000);
           }
         },
       });

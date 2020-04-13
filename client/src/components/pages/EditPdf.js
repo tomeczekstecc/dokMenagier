@@ -81,9 +81,8 @@ const EditPdf = (props) => {
   };
 
   const handleChange = (e) => {
-    if (e === 'pdf' || e === 'film') {
-      body.type = e;
-    } else if (e === 'ben' || e === 'oper') {
+    body.type = 'pdf';
+    if (e === 'ben' || e === 'oper') {
       body.target = e;
     } else if (e === 'premiere') {
       body.premiereTag = true;
@@ -106,7 +105,6 @@ const EditPdf = (props) => {
       body.title.length > 2 &&
       body.title.length < 101 &&
       body.target !== '' &&
-      body.type !== '' &&
       body.shortTitle !== '' &&
       body.shortTitle.length > 2 &&
       body.publishDate !== '' &&
@@ -179,7 +177,7 @@ const EditPdf = (props) => {
   return (
     <>
       <div style={style.main}>
-        <TopHeader title='Edycja' icon='fas fa-file-signature' />
+        <TopHeader title='Edycja PDF' icon='fas fa-file-signature' />
 
         <div style={style.container}>
           <CardPdfPreview style={style.preview} body={body} />
@@ -207,23 +205,6 @@ const EditPdf = (props) => {
                   ],
                 }
               )(<Input />)}
-            </Form.Item>
-
-            <Form.Item label='Typ instrukcji' hasFeedback>
-              {getFieldDecorator('type', {
-                initialValue: type,
-                rules: [
-                  {
-                    required: true,
-                    message: 'Musisz wybrać wartosć',
-                  },
-                ],
-              })(
-                <Select onChange={handleChange} style={{ width: 175 }}>
-                  <Option value='pdf'>PDF</Option>
-                  <Option value='film'>Film</Option>
-                </Select>
-              )}
             </Form.Item>
 
             <Form.Item label='Dla kogo' hasFeedback>
@@ -361,7 +342,7 @@ const EditPdf = (props) => {
               )(<Input type='number' />)}
             </Form.Item>
 
-            <Form.Item label='Oznacz jako premierowe' hasFeedback>
+            <Form.Item label='Premierowe' hasFeedback>
               {getFieldDecorator(
                 'premiereTag',
 
@@ -382,7 +363,7 @@ const EditPdf = (props) => {
               )}
             </Form.Item>
 
-            <Form.Item label='Oznacz jako archiwalne' hasFeedback>
+            <Form.Item label='Archiwalne' hasFeedback>
               {getFieldDecorator(
                 'archived',
 
