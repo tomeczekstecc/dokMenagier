@@ -27,7 +27,7 @@ const CardPdfPreview = ({ body }) => {
         <i
           className={iconType}
           style={{
-            transform: 'translate(350px,60px) scale(1.1)',
+            transform: 'translate(345px,250px) scale(1.1)',
             position: 'fixed',
             zIndex: 10,
             width: '20px',
@@ -53,6 +53,9 @@ const CardPdfPreview = ({ body }) => {
       <Card
         style={style.main}
         cover={
+
+
+          
           <img
             style={style.img}
             alt='example'

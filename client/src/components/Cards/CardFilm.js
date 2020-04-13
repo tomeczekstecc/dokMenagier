@@ -26,7 +26,8 @@ const CardFilm = ({
 
 
   return (
-    <div id='card_ant'
+    <div
+      id='card_ant'
       style={{
         zIndex: -2,
         fontFamily:
@@ -37,13 +38,12 @@ const CardFilm = ({
         <i
           className={iconType}
           style={{
-            transform: 'translate(350px,100px) scale(1.3)',
+            transform: 'translate(355px,275px) scale(1.3)',
             zIndex: 10,
             maxWidth: '50px',
             display: 'block',
             color: 'rgba(0,0,0,0.4)',
             fontSize: '1.8em',
-
           }}
         ></i>
       </div>
@@ -55,24 +55,18 @@ const CardFilm = ({
           zIndex: 10,
           display: `${displayBadge}`,
         }}
-      >
-
-      </Badge>
-      <Card id='card_ant_film'
+      ></Badge>
+      <Card
+        id='card_ant_film'
         style={style.main}
         cover={
-          <img
+          <iframe
             style={style.img}
-            alt='example'
-            // src='./spinner.gif'
-            // src={`1
-            //   loading
-            //     ? spinner
-            //     : 'http://bestcodes.pl/lsi/app_files/img/rwd.jpg'
-            // }
-            src='http://bestcodes.pl/lsi/app_files/img/rwd_film.jpg'
-            // src='https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png'
-          />
+            src={film.linkYT}
+            frameborder='0'
+            allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
+            allowfullscreen
+          ></iframe>
         }
         actions={[
           // <Icon type='download' key='download' />,
@@ -100,7 +94,6 @@ const CardFilm = ({
         <Meta
           // avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
           title={film.title.toUpperCase()}
-
         />
       </Card>
     </div>
@@ -110,7 +103,7 @@ const CardFilm = ({
 const style = {
   main: {
     margin: '15px',
-    maxWidth: 370,
+    width: 370,
     height: 300,
     overflow: 'hidden',
     boxShadow: '1px 1px 10px -4px rgba(0,0,0,0.75)',

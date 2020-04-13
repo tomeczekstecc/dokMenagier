@@ -113,9 +113,10 @@ label[name='Wybierz plik']{
 
 
 
-#card_ant_film .ant-card-body{
+#card_ant_film .ant-card-bod, #card_film_preview .ant-card-body{
 height: 60px;
 padding: 20px;
+padding-right: 35px;
 }
 
 
@@ -143,7 +144,7 @@ padding: 20px;
     margin: 15px;
   }
 
-  div[style='display: grid; grid-template-columns: 30% 70%; width: 100%;'] {
+  div[style='display: grid; grid-template-columns: 30% 70%; width: 100%;'], div[style='display: grid; grid-template-columns: 40% 60%; width: 100%;'] {
     display: flex !important;
     flex-wrap: wrap !important;
     justify-content: center !important;

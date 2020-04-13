@@ -139,7 +139,11 @@ if (e === 'ben' || e === 'oper') {
         <TopHeader title='Dodawanie filmu' icon='fas fa-file-import' />
 
         <div style={style.container}>
-          <CardFilmPreview id = 'card_film_preview_container' style={style.preview} body={body} />
+          <CardFilmPreview
+            id='card_film_preview_container'
+            style={style.preview}
+            body={body}
+          />
           <Form {...formItemLayout} onSubmit={handleSubmit} style={style.form}>
             <Form.Item label='Tytuł' onChange={handleChange} hasFeedback>
               {getFieldDecorator('title', {
@@ -160,7 +164,6 @@ if (e === 'ben' || e === 'oper') {
               })(<Input />)}
             </Form.Item>
 
-
             <Form.Item label='Dla kogo' hasFeedback>
               {getFieldDecorator('target', {
                 rules: [
@@ -177,13 +180,12 @@ if (e === 'ben' || e === 'oper') {
               )}
             </Form.Item>
 
-            <Form.Item label='linkYT' onChange={handleChange} hasFeedback>
+            <Form.Item label='Link YouTube' onChange={handleChange} hasFeedback>
               {getFieldDecorator('linkYT', {
                 rules: [
                   {
                     min: 3,
-                    message:
-                      'Link musi składać się z co najmniej 3 znaków',
+                    message: 'Link musi składać się z co najmniej 3 znaków',
                   },
                   {
                     required: true,
@@ -192,7 +194,6 @@ if (e === 'ben' || e === 'oper') {
                 ],
               })(<Input />)}
             </Form.Item>
-
 
             <Form.Item label='Premierowe' hasFeedback>
               {getFieldDecorator('premiereTag', {

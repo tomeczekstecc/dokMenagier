@@ -215,7 +215,7 @@ body.type='film'
               )}
             </Form.Item>
 
-            <Form.Item label='Krótki tytuł' onChange={handleChange} hasFeedback>
+            <Form.Item label='Link YouTube' onChange={handleChange} hasFeedback>
               {getFieldDecorator(
                 'linkYT',
 
