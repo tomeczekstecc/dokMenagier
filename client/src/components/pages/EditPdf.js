@@ -19,6 +19,7 @@ const EditPdf = (props) => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [pending, setPending] = useState(false);
+  const [disableButton, setDisableButton] = useState(false);
 
   let {
     title,
@@ -52,8 +53,6 @@ const EditPdf = (props) => {
     premiereTag,
     archived,
   });
-
-  console.log(title);
 
   const { getFieldDecorator } = props.form;
 
@@ -96,7 +95,6 @@ const EditPdf = (props) => {
     } else {
       body[e.target.id.split('edit_')[1]] = e.target.value;
     }
-    console.log(body);
     //eslint-disable-next-line
     body.pdfFileName = `${
       '[' + body.ver + ']' + '_' + body.shortTitle + '_' + body.target
@@ -122,6 +120,21 @@ const EditPdf = (props) => {
       setAllReady(true);
     } else {
       setAllReady(false);
+    }
+
+    let errors = Object.values(props.form.getFieldsError());
+
+    let newErrors = [];
+    for (const val of errors) {
+      if (val !== undefined) {
+        newErrors.push(val);
+      }
+    }
+
+    if (newErrors.length > 0) {
+      setDisableButton(true);
+    } else {
+      setDisableButton(false);
     }
   };
 
@@ -216,7 +229,8 @@ const EditPdf = (props) => {
               {getFieldDecorator(
                 'target',
 
-                {initialValue: target,
+                {
+                  initialValue: target,
                   rules: [
                     {
                       required: true,
@@ -236,7 +250,8 @@ const EditPdf = (props) => {
               {getFieldDecorator(
                 'shortTitle',
 
-                {initialValue: shortTitle,
+                {
+                  initialValue: shortTitle,
                   rules: [
                     {
                       min: 3,
@@ -267,7 +282,8 @@ const EditPdf = (props) => {
               {getFieldDecorator(
                 'publishDate',
 
-                {initialValue: publishDate,
+                {
+                  initialValue: publishDate,
                   rules: [
                     {
                       required: true,
@@ -293,7 +309,8 @@ const EditPdf = (props) => {
               {getFieldDecorator(
                 'ver',
 
-                {initialValue: ver,
+                {
+                  initialValue: ver,
                   rules: [
                     {
                       required: true,
@@ -313,7 +330,8 @@ const EditPdf = (props) => {
               {getFieldDecorator(
                 'prevVer',
 
-                {initialValue: prevVer ,
+                {
+                  initialValue: prevVer,
                   rules: [
                     {
                       required: true,
@@ -329,7 +347,8 @@ const EditPdf = (props) => {
               {getFieldDecorator(
                 'pagesCount',
 
-                {initialValue: pagesCount,
+                {
+                  initialValue: pagesCount,
                   rules: [
                     {
                       required: true,
@@ -345,7 +364,8 @@ const EditPdf = (props) => {
               {getFieldDecorator(
                 'premiereTag',
 
-                {initialValue: convPremiereTag,
+                {
+                  initialValue: convPremiereTag,
                   rules: [
                     {
                       required: true,
@@ -365,7 +385,8 @@ const EditPdf = (props) => {
               {getFieldDecorator(
                 'archived',
 
-                {initialValue: convArchived,
+                {
+                  initialValue: convArchived,
                   rules: [
                     {
                       required: true,
@@ -392,6 +413,7 @@ const EditPdf = (props) => {
             <Form.Item {...tailFormItemLayout}>
               <Button
                 loading={pending}
+                disabled={disableButton}
                 type='primary'
                 size='large'
                 htmlType='submit'
