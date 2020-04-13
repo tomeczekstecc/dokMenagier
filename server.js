@@ -32,8 +32,8 @@ app.use("/api/pdfs", require("./router/pdfs"));
 app.use("/api/films", require("./router/films"));
 app.use("/api/upload", require("./router/upload"));
 
-app.get('/api/*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'client/public/index.html'), function (err) {
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'client/static/index.html'), function (err) {
     if (err) {
       res.status(500).send(err);
     }
