@@ -237,7 +237,7 @@ body.type='film'
             </Form.Item>
 
 
-            <Form.Item label='Oznacz jako premierowe' hasFeedback>
+            <Form.Item label='Premierowe' hasFeedback>
               {getFieldDecorator(
                 'premiereTag',
 
@@ -258,7 +258,7 @@ body.type='film'
               )}
             </Form.Item>
 
-            <Form.Item label='Oznacz jako archiwalne' hasFeedback>
+            <Form.Item label='Archiwalne' hasFeedback>
               {getFieldDecorator(
                 'archived',
 

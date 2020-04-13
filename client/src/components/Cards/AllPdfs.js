@@ -59,7 +59,7 @@ const AllPdfs = () => {
   };
   return (
     <div>
-      <TopHeader title='Zarządzanie' icon='fas fa-cog' />
+      <TopHeader title='Zarządzanie PDF' icon='fas fa-cog' />
 
       <h5 style={style.h3}>INSTRUKCJE DLA OPERATORA</h5>
       <div id='type_cards_wrapper' className='animated fadeIn' style={style}>
