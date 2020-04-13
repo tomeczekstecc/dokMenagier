@@ -11,7 +11,7 @@ import CardPdfPreview from '../layout/partials/CardPdfPreview';
 const { Option } = Select;
 
 const EditPdf = (props) => {
-  const { id } = props.match.params;
+  // const { id } = props.match.params;
   const pdfContext = useContext(PdfContext);
   const { curPdf, setAllReady } = pdfContext;
 
@@ -22,6 +22,7 @@ const EditPdf = (props) => {
   const [disableButton, setDisableButton] = useState(false);
 
   let {
+    _id,
     title,
     type,
     target,
@@ -148,7 +149,7 @@ const EditPdf = (props) => {
           'Content-Type': 'application/json',
         },
       };
-      await axios.put(`/api/pdfs/${id}`, body, config).then((res) => {
+      await axios.put(`/api/pdfs/${_id}`, body, config).then((res) => {
         if (res.data.result === 'success') {
           setTimeout(() => {
             enqueueSnackbar(`${res.data.msg}`, {
