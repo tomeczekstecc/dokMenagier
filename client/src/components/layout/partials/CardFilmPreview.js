@@ -55,7 +55,7 @@ const CardPdfPreview = ({ body }) => {
         cover={
 
 
-          
+
           <img
             style={style.img}
             alt='example'

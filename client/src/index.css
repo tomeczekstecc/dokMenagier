@@ -22,7 +22,8 @@ a:hover {
 
 #card_ant {
   transition: all 0.1s ease-in-out;
-align-items: center;  font-family: 'apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto',
+  align-items: center;
+  font-family: 'apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto',
     'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !important;
 }
@@ -41,13 +42,14 @@ align-items: center;  font-family: 'apple-system', 'BlinkMacSystemFont', 'Segoe 
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !important;
 }
 
-#card_pdf:hover, #card_ant_film:hover,.ant-card.ant-card-bordered {
-
-  box-shadow: 1px 1px 20px 5px rgba(0,0,0,0.75)
+#card_pdf:hover,
+#card_ant_film:hover,
+.ant-card.ant-card-bordered {
+  box-shadow: 1px 1px 20px 5px rgba(0, 0, 0, 0.75);
 }
 
-#card_film_preview  {
- transition: all 0.1s ease-in-out !important;
+#card_film_preview {
+  transition: all 0.1s ease-in-out !important;
 
   justify-self: self-end !important;
   margin-right: 5px !important;
@@ -59,8 +61,6 @@ align-items: center;  font-family: 'apple-system', 'BlinkMacSystemFont', 'Segoe 
     'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !important;
 }
-
-
 
 .ant-form.ant-form-horizontal {
   justify-self: self-start;
@@ -100,31 +100,59 @@ ul li:hover {
 }
 
 #type_cards_wrapper {
-  margin-bottom: 60px  !important;
+  margin-bottom: 60px !important;
 }
 
-input[type='file']{
+input[type='file'] {
   height: 1px;
 }
 
-label[name='Wybierz plik']{
+label[name='Wybierz plik'] {
   margin-top: 40px;
 }
 
-
-
-#card_ant_film .ant-card-bod, #card_film_preview .ant-card-body{
-height: 60px;
-padding: 20px;
-padding-right: 35px;
+#card_ant_film .ant-card-bod,
+#card_film_preview .ant-card-body {
+  height: 60px;
+  padding: 20px;
+  padding-right: 35px;
 }
 
+#home_button_pdf {
+  /* background-image: url('./img/ins_pdf_logo.png'); */
+}
 
+/* !! home buttons */
 
+#home_container {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: space-around  !important;
+  align-items: center !important;
+  align-content: center !important;
+  height: 80vh !important;
+}
 
+.home_btn {
+  box-shadow: 1px 1px 10px -4px rgba(0, 0, 0, 0.75) !important;
+  transition: all 0.1s ease-in-out !important;
 
+}
 
+.home_btn:hover {
+  box-shadow: 1px 1px 20px -4px rgba(0, 0, 0, 0.75) !important;
+  cursor: pointer  !important;
 
+  transform: translateY(-4px)  !important;
+}
+
+#home_button_film {
+  width: 25%;
+}
+
+#home_button_pdf {
+  width: 16%;
+}
 
 @media (max-width: 768px) {
   .burger {
@@ -144,7 +172,8 @@ padding-right: 35px;
     margin: 15px;
   }
 
-  div[style='display: grid; grid-template-columns: 30% 70%; width: 100%;'], div[style='display: grid; grid-template-columns: 40% 60%; width: 100%;'] {
+  div[style='display: grid; grid-template-columns: 30% 70%; width: 100%;'],
+  div[style='display: grid; grid-template-columns: 40% 60%; width: 100%;'] {
     display: flex !important;
     flex-wrap: wrap !important;
     justify-content: center !important;
@@ -171,13 +200,11 @@ padding-right: 35px;
     margin: 0 0 7px 0 !important;
   }
 
-
   #card_pdf {
     display: block !important;
     margin: 0 auto !important;
-
   }
-  h5{
+  h5 {
     text-align: center !important;
   }
 }

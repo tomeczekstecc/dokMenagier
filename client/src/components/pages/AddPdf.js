@@ -72,7 +72,7 @@ const AddPdf = (props) => {
   };
 
   const handleChange = async (e) => {
-if (e === 'ben' || e === 'oper') {
+    if (e === 'ben' || e === 'oper') {
       body.target = e;
     } else if (e === 'premiere') {
       body.premiereTag = true;
@@ -86,7 +86,9 @@ if (e === 'ben' || e === 'oper') {
       body[e.target.id.split('addpdf_')[1]] = e.target.value;
     }
     // eslint-disable-next-line
-    body.pdfFileName = `${'[' + body.ver + ']' + '_' + body.shortTitle + '_' + body.target}.pdf`;
+    body.pdfFileName = `${
+      '[' + body.ver + ']' + '_' + body.shortTitle + '_' + body.target
+    }.pdf`;
 
     if (
       body.title !== '' &&
@@ -153,7 +155,11 @@ if (e === 'ben' || e === 'oper') {
         <TopHeader title='Dodawanie PDF' icon='fas fa-file-import' />
 
         <div style={style.container}>
-          <CardPdfPreview id = 'card_pdf_preview_container' style={style.preview} body={body} />
+          <CardPdfPreview
+            id='card_pdf_preview_container'
+            style={style.preview}
+            body={body}
+          />
           <Form {...formItemLayout} onSubmit={handleSubmit} style={style.form}>
             <Form.Item label='Tytuł' onChange={handleChange} hasFeedback>
               {getFieldDecorator('title', {
@@ -173,7 +179,6 @@ if (e === 'ben' || e === 'oper') {
                 ],
               })(<Input />)}
             </Form.Item>
-
 
             <Form.Item label='Dla kogo' hasFeedback>
               {getFieldDecorator('target', {
@@ -280,7 +285,7 @@ if (e === 'ben' || e === 'oper') {
               })(<Input type='number' />)}
             </Form.Item>
 
-            <Form.Item label='Oznacz jako premierowe' hasFeedback>
+            <Form.Item label='Premierowe' hasFeedback>
               {getFieldDecorator('premiereTag', {
                 rules: [
                   {
@@ -296,7 +301,7 @@ if (e === 'ben' || e === 'oper') {
               )}
             </Form.Item>
 
-            <Form.Item label='Oznacz jako archiwalne' hasFeedback>
+            <Form.Item label='Archiwalne' hasFeedback>
               {getFieldDecorator(
                 'archived',
 
@@ -317,13 +322,11 @@ if (e === 'ben' || e === 'oper') {
             </Form.Item>
 
             <Form.Item onChange={handleChange} label='Dodaj plik' hasFeedback>
-
-                <FileUpload
-                  isSubmitting={isSubmitting}
-                  setIsSubmitting={setIsSubmitting}
-                  pdfFileName={body.pdfFileName}
-                />
-
+              <FileUpload
+                isSubmitting={isSubmitting}
+                setIsSubmitting={setIsSubmitting}
+                pdfFileName={body.pdfFileName}
+              />
             </Form.Item>
 
             <Form.Item {...tailFormItemLayout}>
