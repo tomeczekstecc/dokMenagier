@@ -15,10 +15,10 @@ a {
   transition: all 0.5 ease-in-out;
 }
 
-a:hover {
+/* a:hover {
   text-decoration: none;
   transform: scale(1.05);
-}
+} */
 
 #card_ant {
   transition: all 0.1s ease-in-out;
@@ -118,16 +118,13 @@ label[name='Wybierz plik'] {
   padding-right: 35px;
 }
 
-#home_button_pdf {
-  /* background-image: url('./img/ins_pdf_logo.png'); */
-}
 
 /* !! home buttons */
 
 #home_container {
   display: flex !important;
   flex-wrap: wrap !important;
-  justify-content: space-around  !important;
+  justify-content: space-evenly !important;
   align-items: center !important;
   align-content: center !important;
   height: 80vh !important;
@@ -136,22 +133,23 @@ label[name='Wybierz plik'] {
 .home_btn {
   box-shadow: 1px 1px 10px -4px rgba(0, 0, 0, 0.75) !important;
   transition: all 0.1s ease-in-out !important;
-
+  margin: 15px !important;
+  width: 325px !important;
 }
 
 .home_btn:hover {
   box-shadow: 1px 1px 20px -4px rgba(0, 0, 0, 0.75) !important;
-  cursor: pointer  !important;
+  cursor: pointer !important;
 
-  transform: translateY(-4px)  !important;
+  transform: translateY(-1px) !important;
 }
 
 #home_button_film {
-  width: 25%;
+  width: 360px !important;
 }
 
 #home_button_pdf {
-  width: 16%;
+  width: 280px !important;
 }
 
 @media (max-width: 768px) {

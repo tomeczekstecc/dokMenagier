@@ -1,8 +1,9 @@
 import React from 'react';
-import FloatingButton from '../layout/partials/FloatingButton';
+import { Link } from 'react-router-dom';
+// import FloatingButton from '../layout/partials/FloatingButton';
 import TopHeader from '../layout/partials/TopHeader';
-import pdf_logo from '../../img/ins_pdf_logo.png'
-import film_logo from '../../img/ins_film_logo.png'
+import pdf_logo from '../../img/ins_pdf_logo.png';
+import film_logo from '../../img/ins_film_logo.png';
 
 const Home = () => {
   return (
@@ -32,14 +33,14 @@ const Home = () => {
       </div> */}
 
       <div id='home_container'>
-        <img className="home_btn"src={pdf_logo} id='home_button_pdf'></img>
-
-
-        <img className="home_btn"src={film_logo} id='home_button_film'></img>
-
+        <Link to='/allpdfs'>
+          <img className='home_btn' src={pdf_logo} id='home_button_pdf'></img>
+        </Link>
+        <Link to='/allfilms'>
+          <img className='home_btn' src={film_logo} id='home_button_film'></img>
+        </Link>
       </div>
     </>
-
   );
 };
 
