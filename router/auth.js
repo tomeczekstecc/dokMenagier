@@ -47,10 +47,17 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
   try {
     const { name, password } = req.body;
+
     //1. Find user in database
-    const user = await User.findOne({ name });
+    const user = await User.findOne({
+      name,
+    });
+ 
     if (!user) {
-      return res.json({ msg: 'Logowanie nieudane.', result: 'error' });
+      return res.json({
+        msg: 'Logowanie nieudane.',
+        result: 'error',
+      });
     }
     //2. Compare passwords
     const isMatch = await bcrypt.compare(password, user.pass);
@@ -61,13 +68,14 @@ router.post('/login', async (req, res) => {
         result: 'error',
       });
     } else {
+
       //3. Create tokens
-      const accessToken = tokens.createAccessToken(user.id);
-      const refreshToken = tokens.createRefreshToken(user.id);
-      //4. save refreshtoken in database
+      const accessToken = tokens.createAccessToken(user._id);
+      const refreshToken = tokens.createRefreshToken(user._id);
+      // 4. save refreshtoken in database
 
       await User.updateOne(
-        { _id: user.id },
+        { _id: user._id },
         {
           $set: {
             refreshToken,
@@ -79,28 +87,62 @@ router.post('/login', async (req, res) => {
 
       tokens.sendRefreshToken(res, refreshToken);
       tokens.sendAccessToken(req, res, accessToken);
-
     }
   } catch (error) {
-    res.json({ msg: `Błąd: ${error.message}`, result: 'error' });
+    res.json({
+      msg: `Błąd1: ${error.message}`,
+      result: 'error',
+    });
   }
+
+  //@desc logout user
+  //@route POST auth/logout
+  //@access private
+
+  router.post('/logout', (_req, res) => {
+    res.clearCookie('refreshToken', {
+      path: '/api/auth/refresh_token',
+    });
+    return res.json({
+      result: 'info',
+      msg: 'Pomyślnie wylogowano',
+    });
+  });
+
+
+
+
+
 
   router.post('/refresh_token', async (req, res) => {
     const token = req.cookies.refreshToken;
     // If we don't have a token in our request
-    if (!token) return res.send({ accessToken: '' });
+    if (!token)
+      return res.send({
+        accessToken: '',
+      });
     // We have a token, let's verify it!
     let payload = null;
     try {
       payload = verify(token, process.env.REFRESH_TOKEN_SECRET);
     } catch (err) {
-      return res.send({ accessToken: '' });
+      return res.send({
+        accessToken: '',
+      });
     }
     // token is valid, check if user exist
-    const user = User.findOne({ _id: payload.userId });
-    if (!user) return res.send({ accessToken: '' });
+    const user = User.findOne({
+      _id: payload.userId,
+    });
+    if (!user)
+      return res.send({
+        accessToken: '',
+      });
     // user exist, check if refreshtoken exist on user
-    if (user.refreshToken !== token) return res.send({ accessToken: '' });
+    if (user.refreshToken !== token)
+      return res.send({
+        accessToken: '',
+      });
     // token exist, create new Refresh- and accesstoken
     const accessToken = tokens.createAccessToken(user.id);
     const refreshToken = tokens.createRefreshToken(user.id);
@@ -116,7 +158,9 @@ router.post('/login', async (req, res) => {
     );
     // All good to go, send new refreshtoken and accesstoken
     tokens.sendRefreshToken(res, refreshToken);
-    return res.send({ accessToken });
+    return res.send({
+      accessToken,
+    });
   });
 });
 

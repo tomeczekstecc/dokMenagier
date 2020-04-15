@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,500&display=swap');
+
+* {
+	box-sizing: border-box !important;
+}
+
+.main_container_login {
+	/* background-color: #9b59b6 !important; */
+	display: flex  !important;
+	align-items: center !important;
+	justify-content: center !important;
+	min-height: 90vh !important;
+	margin: 0 !important;
+}
+.container_login {
+	background-color: #fff !important;
+	border-radius: 5px  !important;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3) !important;
+	overflow: hidden !important;
+	width: 400px !important;
+	max-width: 100% !important;
+}
+
+.header {
+	/* border-bottom: 1px solid #f0f0f0; */
+	/* background-color: #f7f7f7; */
+	padding: 20px 40px !important;
+}
+
+.header h2 {
+	margin: 0 !important;
+}
+
+.form_login {
+	padding: 30px 40px !important;
+}
+
+.form-control_login {
+	margin-bottom: 10px !important;
+	padding-bottom: 20px !important;
+	position: relative !important;
+}
+
+.form-control_login label {
+	display: inline-block !important;
+	margin-bottom: 5px !important;
+}
+
+.form-control_login input {
+	border: 2px solid #f0f0f0 !important;
+	border-radius: 4px !important;
+	display: block !important;
+	font-family: inherit !important;
+	font-size: 14px !important;
+	padding: 10px !important;
+	width: 100% !important;
+}
+
+.form-control_login input:focus {
+	outline: 0 !important;
+	border-color: #777 !important;
+}
+
+
+
+.form_login button {
+	background-color: #117dc5 !important;
+	border: 2px solid #117dc5!important;
+	border-radius: 4px !important;
+	color: #fff !important;
+	display: block !important;
+	font-family: inherit !important;
+	font-size: 16px !important;
+	padding: 10px !important;
+	margin-top: 20px !important;
+	width: 100% !important;
+}
+

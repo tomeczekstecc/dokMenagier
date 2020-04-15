@@ -63,9 +63,9 @@ const CardFilm = ({
           <iframe
             style={style.img}
             src={film.linkYT}
-            frameborder='0'
+            frameBorder='0'
             allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
-            allowfullscreen
+            allowFullScreen
           ></iframe>
         }
         actions={[

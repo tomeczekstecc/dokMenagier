@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import FilmContext from '../../context/film/filmContext';
+import AuthContext from '../../context/auth/authContext';
 import TopHeader from '../layout/partials/TopHeader';
 import axios from 'axios';
-import FileUpload from '../layout/partials/FileUpload';
 import { useSnackbar } from 'notistack';
 import { Form, Input, Tooltip, Icon, Select, Button } from 'antd';
 import CardFilmPreview from '../layout/partials/CardFilmPreview';
@@ -11,15 +11,26 @@ import CardFilmPreview from '../layout/partials/CardFilmPreview';
 const { Option } = Select;
 
 const EditFilm = (props) => {
+
   // const { id } = props.match.params;
   const filmContext = useContext(FilmContext);
   const { curFilm, setAllReady } = filmContext;
-
   const { enqueueSnackbar } = useSnackbar();
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [setIsSubmitting] = useState(false);
   const [pending, setPending] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
+  const authContext = useContext(AuthContext);
+  const { user } = authContext;
+
+
+  if (
+    !user.accessToken ||
+    user.accessToken === undefined ||
+    user.accessToken === ''
+  ) {
+    props.history.push('/login');
+  }
+
 
   let {
     _id,

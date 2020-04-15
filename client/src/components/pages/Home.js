@@ -1,36 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 // import FloatingButton from '../layout/partials/FloatingButton';
 import TopHeader from '../layout/partials/TopHeader';
+import AuthContext from '../../context/auth/authContext';
 import pdf_logo from '../../img/ins_pdf_logo.png';
 import film_logo from '../../img/ins_film_logo.png';
 
-const Home = () => {
+const Home = (props) => {
+  const authContext = useContext(AuthContext);
+  const { user } = authContext;
+
+  if (
+    !user.accessToken ||
+    user.accessToken === undefined ||
+    user.accessToken === ''
+  ) {
+    props.history.push('/login');
+  }
+
   return (
     <>
       <TopHeader title='Start' icon='fas fa-home' />
-      {/* <div style={style.main}>
-        <div style={style.item}>
-          <FloatingButton
-            scale={2}
-            text='Zarządzaj'
-            linkTo='allpdfs'
-            position='relative'
-            p_marginTop='60px'
-          />
-        </div>
-
-        <div style={style.item}>
-          {' '}
-          <FloatingButton
-            scale={2}
-            text='Dodaj'
-            linkTo='newpdf'
-            position='relative'
-            p_marginTop='60px'
-          />
-        </div>
-      </div> */}
 
       <div id='home_container'>
         <Link to='/allpdfs'>
@@ -42,28 +32,6 @@ const Home = () => {
       </div>
     </>
   );
-};
-
-const style = {
-  main: {
-    position: 'static',
-    width: '100%',
-    height: '100vh',
-    display: 'flex',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    alignContent: 'center',
-    top: '40%',
-    left: '45%',
-    // backgroundImage: 'url("http://bestcodes.pl/lsi/img/rwd_lsi_corn.png")',
-    backgrounPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-  },
-  item: {
-    display: 'flex',
-    flexDirectiom: 'column',
-  },
 };
 
 export default Home;

@@ -1,20 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import MenuButton from '../partials/MenuButton';
-const TopHeader = (props) => {
-  let homeDisable, allPdfsDisable;
+import AuthContext from '../../../context/auth/authContext';
+import { useSnackbar } from 'notistack';
 
-  if (props.title === 'Zarządzanie') {
-    allPdfsDisable = 'none';
-  } else if (props.title === 'Start') {
-    homeDisable = 'none';
-  }
+const TopHeader = (props) => {
+
+  const authContext = useContext(AuthContext);
+  const { user } = authContext;
+
+  const { logOutCallback } = authContext;
+  const { enqueueSnackbar } = useSnackbar();
+
+  const handleClick = () => {
+    enqueueSnackbar('Poprawnie wylogowano', {
+      variant: 'info',
+    });
+    logOutCallback();
+  };
+
 
   const [displayMenu, setDisplayMenu] = useState(false);
 
   const handleClickMenuButton = () => {
     setDisplayMenu(!displayMenu);
-    console.log(displayMenu);
+
   };
 
   return (
@@ -48,36 +58,43 @@ const TopHeader = (props) => {
             <i className='fas fa-eye'></i>
           </a>
         </li>
+
         <li>
-          <Link style={style.li} to='/allpdfs'>
+          <Link
+            style={user.accessToken ? style.li : { display: 'none' }}
+            to='/allpdfs'
+          >
             {/* <i className='fas fa-cog'></i> */}
             PDF
           </Link>
         </li>
         <li>
-          <Link style={style.li} to='/allfilms'>
+          <Link
+            style={user.accessToken ? style.li : { display: 'none' }}
+            to='/allfilms'
+          >
             {/* <i className='fas fa-cog'></i> */}
             Filmy
           </Link>
         </li>
 
-        <li style={{ display: `${homeDisable}` }}>
+        <li>
           {' '}
-          <Link to='/' style={style.li}>
+          <Link
+            to='/'
+            style={user.accessToken ? style.li : { display: 'none' }}
+          >
             {/* <i className='fas fa-home'></i> */}
             Start
           </Link>
         </li>
+
         <li>
           {' '}
-          <Link to='/' style={style.li}>
-            {/* <i className='fas fa-user'></i> */}
-            Log<strong>In</strong>
-          </Link>
-        </li>
-        <li>
-          {' '}
-          <Link to='/' style={style.li}>
+          <Link
+            onClick={handleClick}
+            style={user.accessToken ? style.li : { display: 'none' }}
+          >
             {/* <i className='fas fa-heart'></i> */}
             Log<strong>Out</strong>
           </Link>

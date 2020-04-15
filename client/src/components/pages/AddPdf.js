@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Form, Input, Tooltip, Icon, Select, Button } from 'antd';
 import { useSnackbar } from 'notistack';
 import PdfContext from '../../context/pdf/pdfContext';
+import AuthContext from '../../context/auth/authContext';
 import FileUpload from '../layout/partials/FileUpload';
 import TopHeader from '../layout/partials/TopHeader';
 import CardPdfPreview from '../layout/partials/CardPdfPreview';
@@ -13,8 +14,20 @@ const { Option } = Select;
 
 const AddPdf = (props) => {
   const pdfContext = useContext(PdfContext);
+  const authContext = useContext(AuthContext);
+  const {user} = authContext
   const { setAllReady, allReady } = pdfContext;
   const { enqueueSnackbar } = useSnackbar();
+
+
+
+  if (
+    !user.accessToken ||
+    user.accessToken === undefined ||
+    user.accessToken === ''
+  ) {
+    props.history.push('/login');
+  }
 
   useEffect(() => {
     setBody({

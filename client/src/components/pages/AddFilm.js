@@ -2,10 +2,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 // eslint-disable-next-line
 import axios from 'axios';
-import { Form, Input, Tooltip, Icon, Select, Button } from 'antd';
+import { Form, Input, Select, Button } from 'antd';
 import { useSnackbar } from 'notistack';
 import FilmContext from '../../context/film/filmContext';
-import FileUpload from '../layout/partials/FileUpload';
+import AuthContext from '../../context/auth/authContext';
 import TopHeader from '../layout/partials/TopHeader';
 import CardFilmPreview from '../layout/partials/CardFilmPreview';
 
@@ -15,6 +15,17 @@ const AddFilm = (props) => {
   const filmContext = useContext(FilmContext);
   const { setAllReady, allReady } = filmContext;
   const { enqueueSnackbar } = useSnackbar();
+  const authContext = useContext(AuthContext);
+  const { user } = authContext;
+
+
+  if (
+    !user.accessToken ||
+    user.accessToken === undefined ||
+    user.accessToken === ''
+  ) {
+    props.history.push('/login');
+  }
 
   useEffect(() => {
     setBody({
@@ -32,7 +43,7 @@ const AddFilm = (props) => {
     target: '',
     type: 'film',
     linkYT: '',
-       premiereTag: '',
+    premiereTag: '',
     archived: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -64,7 +75,7 @@ const AddFilm = (props) => {
   };
 
   const handleChange = async (e) => {
-if (e === 'ben' || e === 'oper') {
+    if (e === 'ben' || e === 'oper') {
       body.target = e;
     } else if (e === 'premiere') {
       body.premiereTag = true;
@@ -78,7 +89,9 @@ if (e === 'ben' || e === 'oper') {
       body[e.target.id.split('addfilm_')[1]] = e.target.value;
     }
     // eslint-disable-next-line
-    body.filmFileName = `${'[' + body.ver + ']' + '_' + body.shortTitle + '_' + body.target}.film`;
+    body.filmFileName = `${
+      '[' + body.ver + ']' + '_' + body.shortTitle + '_' + body.target
+    }.film`;
 
     if (
       body.title !== '' &&

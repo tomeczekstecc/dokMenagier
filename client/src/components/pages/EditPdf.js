@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PdfContext from '../../context/pdf/pdfContext';
+import AuthContext from '../../context/auth/authContext';
 import TopHeader from '../layout/partials/TopHeader';
 import axios from 'axios';
 import FileUpload from '../layout/partials/FileUpload';
@@ -14,12 +15,20 @@ const EditPdf = (props) => {
   // const { id } = props.match.params;
   const pdfContext = useContext(PdfContext);
   const { curPdf, setAllReady } = pdfContext;
-
+  const authContext = useContext(AuthContext);
+  const { user } = authContext;
   const { enqueueSnackbar } = useSnackbar();
-
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [pending, setPending] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
+
+  if (
+    !user.accessToken ||
+    user.accessToken === undefined ||
+    user.accessToken === ''
+  ) {
+    props.history.push('/login');
+  }
 
   let {
     _id,

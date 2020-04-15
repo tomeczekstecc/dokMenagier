@@ -1,25 +1,22 @@
 const jwt = require('jsonwebtoken');
 
 const createAccessToken = (userId) => {
-  return jwt.sign( userId , process.env.ACCESS_TOKEN_SECRET, {
-    expiresIn: '30m',
+  return jwt.sign({ userId }, process.env.ACCESS_TOKEN_SECRET, {
+    expiresIn: '15m',
   });
 };
-
-// console.log(process.env.ACCESS_TOKEN_SECRET);
 
 const createRefreshToken = (userId) => {
-  return jwt.sign( userId , process.env.REFRESH_TOKEN_SECRET, {
-    expiresIn: '1d',
+  return jwt.sign({ userId }, process.env.REFRESH_TOKEN_SECRET, {
+    expiresIn: '7d',
   });
 };
+
 
 const sendAccessToken = (req, res, accessToken) => {
   res.send({
-    msg: 'Zalogowano.',
-    result: 'success',
     accessToken,
-    name: req.body.name,
+    email: req.body.email,
   });
 };
 
@@ -30,9 +27,11 @@ const sendRefreshToken = (res, refreshToken) => {
   });
 };
 
+
 module.exports = {
   createAccessToken,
   createRefreshToken,
+
   sendAccessToken,
   sendRefreshToken,
 };
