@@ -39,6 +39,16 @@ const TopHeader = (props) => {
         }}
       >
         <li>
+          <a
+            title='strona z instrukcjami'
+            target='_blank'
+            style={{ margin: '0 10px' }}
+            href='http://bestcodes.pl/lsi/index.html'
+          >
+            <i className='fas fa-eye'></i>
+          </a>
+        </li>
+        <li>
           <Link style={style.li} to='/allpdfs'>
             {/* <i className='fas fa-cog'></i> */}
             PDF
@@ -58,7 +68,7 @@ const TopHeader = (props) => {
             Start
           </Link>
         </li>
-        <li >
+        <li>
           {' '}
           <Link to='/' style={style.li}>
             {/* <i className='fas fa-user'></i> */}
@@ -95,9 +105,7 @@ const style = {
     fontWeight: 'bold',
     maxWidth: '100%',
   },
-  ul: {
-
-  },
+  ul: {},
 
   li: {
     color: ' #2c405e',

@@ -15,10 +15,10 @@ a {
   transition: all 0.5 ease-in-out;
 }
 
-/* a:hover {
+a:hover {
   text-decoration: none;
-  transform: scale(1.05);
-} */
+
+}
 
 #card_ant {
   transition: all 0.1s ease-in-out;
