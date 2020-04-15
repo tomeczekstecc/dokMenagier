@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const Pdf = require('../models/Pdf');
-const auth = require('../middleware/auth')
+const auth = require('../middleware/auth');
 
 // Get all pdfs
-router.get('/',auth ,async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const pdfs = await Pdf.find().sort({ order: 1 });
 
@@ -30,11 +30,6 @@ router.get('/',auth ,async (req, res) => {
     });
   }
 });
-
-
-
-
-
 
 // Get one pdf
 router.get('/:id', async (req, res) => {
