@@ -16,7 +16,10 @@ app.use(cookieParser());
 app.use(fileUpload());
 app.use(
   cors({
-    origin: ['http://localhost:3000', 'www.bestcodes.pl'],
+    origin: [
+      'http://bestcodes.pl',
+      'http://localhost:3000',
+    ],
     default: 'http://bestcodes.pl',
     // credentials: true,
   })
