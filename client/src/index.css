@@ -113,6 +113,11 @@ label[name='Wybierz plik'] {
   cursor: pointer;
 }
 
+.progress{
+ transform: translateY(20px);
+ border: 1px solid rgb(206, 206, 206);
+}
+
 #card_ant_film .ant-card-bod,
 #card_film_preview .ant-card-body {
   height: 60px;
