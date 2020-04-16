@@ -18,11 +18,11 @@ let access
 process.env.NODE_ENV === 'development'
   ? (access = process.env.CORS_ACCESS_DEV)
   : (access = process.env.CORS_ACCESS_PROD);
+  console.log(access);
 app.use(fileUpload());
 app.use(
   cors({
     origin: access,
-    default: access,
     credentials: true,
   })
 );
@@ -35,15 +35,7 @@ app.use('/api/pdfs', require('./router/pdfs'));
 app.use('/api/films', require('./router/films'));
 app.use('/api/upload', require('./router/upload'));
 
-app.all('*', function (req, res, next) {
-  let origin = req.headers.origin;
-  res.header('Access-Control-Allow-Origin', origin);
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
-  );
-  next();
-});
+
 
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'client/build/index.html'), function (err) {
