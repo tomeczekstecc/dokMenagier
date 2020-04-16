@@ -26,7 +26,7 @@ const Login = (props) => {
       name,
       password,
     };
-    await axios.post('/api/auth/login', body, headers).then((res) => {
+    await axios.post(`http://${process.env.PORT}/api/auth/login`, body, headers).then((res) => {
       enqueueSnackbar(
         `${res.data.msg === undefined ? 'Pomyślnie zalogowano' : res.data.msg}`,
         {
