@@ -52,7 +52,7 @@ router.post('/login', async (req, res) => {
     const user = await User.findOne({
       name,
     });
- 
+
     if (!user) {
       return res.json({
         msg: 'Logowanie nieudane.',
@@ -99,7 +99,7 @@ router.post('/login', async (req, res) => {
   //@route POST auth/logout
   //@access private
 
-  router.post('/logout', (_req, res) => {
+  router.post('/logout', (req, res) => {
     res.clearCookie('refreshToken', {
       path: '/api/auth/refresh_token',
     });
