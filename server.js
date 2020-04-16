@@ -17,7 +17,7 @@ app.use(fileUpload());
 app.use(
   cors({
     origin: ['http://localhost:3000', 'www.bestcodes.pl'],
-    default: 'http://localhost:3000',
+    default: 'http://bestcodes.pl',
     credentials: true,
   })
 );
@@ -31,8 +31,7 @@ app.use('/api/films', require('./router/films'));
 app.use('/api/upload', require('./router/upload'));
 
 app.all('*', function (req, res, next) {
-  var origin =
-    cors.origin.indexOf(req.header('host').toLowerCase()) > -1
+  var origin = cors.origin.indexOf(req.header('host').toLowerCase()) > -1
       ? req.headers.origin
       : cors.default;
   res.header('Access-Control-Allow-Origin', origin);
