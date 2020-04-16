@@ -31,10 +31,10 @@ app.use('/api/films', require('./router/films'));
 app.use('/api/upload', require('./router/upload'));
 
 app.all('*', function (req, res, next) {
-  var origin = cors.origin.indexOf(req.header('host').toLowerCase()) > -1
-      ? req.headers.origin
-      : cors.default;
-  res.header('Access-Control-Allow-Origin', origin);
+  let origin = req.headers.origin;
+  if (cors.origin.indexOf(origin) >= 0) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
   res.header(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept'
