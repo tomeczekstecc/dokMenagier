@@ -13,14 +13,16 @@ connectDB();
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(cookieParser());
 
+
+let access
+process.env.NODE_ENV === 'development'
+  ? (access = process.env.CORS_ACCESS_DEV)
+  : (access = process.env.CORS_ACCESS_PROD);
 app.use(fileUpload());
 app.use(
   cors({
-    origin: [
-      'http://bestcodes.pl',
-      'http://localhost:3000',
-    ],
-    default: 'http://bestcodes.pl',
+    origin: access,
+    default: access,
     credentials: true,
   })
 );
@@ -35,9 +37,7 @@ app.use('/api/upload', require('./router/upload'));
 
 app.all('*', function (req, res, next) {
   let origin = req.headers.origin;
-  if (cors.origin.indexOf(origin) >= 0) {
-    res.header('Access-Control-Allow-Origin', origin);
-  }
+  res.header('Access-Control-Allow-Origin', origin);
   res.header(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept'
