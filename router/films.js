@@ -236,7 +236,7 @@ router.put('/substract/:id', async (req, res) => {
       },
     });
 
-    res.json({ msg: 'Dokonano zmiany', result: 'info' });
+    res.json({ msg: 'Dokonano zmian', result: 'info' });
   } catch (err) {
     res.json({ msg: 'Coś poszło nie tak', result: 'warning' });
     console.log(err.message);

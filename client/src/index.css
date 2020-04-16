@@ -108,7 +108,9 @@ input[type='file'] {
 }
 
 label[name='Wybierz plik'] {
-  margin-top: 40px;
+  /* margin-top: 40px; */
+  transform: translateY(20px);
+  cursor: pointer;
 }
 
 #card_ant_film .ant-card-bod,
@@ -205,6 +207,18 @@ label[name='Wybierz plik'] {
   h5 {
     text-align: center !important;
   }
+
+#home_button_film {
+  width: 300px !important;
+}
+
+#home_button_pdf {
+  width: 220px !important;
+}
+#card_ant_pdf{
+margin-left: 13vw !important;
+}
+
 }
 
 @media (min-width: 769px) {

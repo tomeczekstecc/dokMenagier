@@ -50,7 +50,7 @@ const AllPdfs = (props) => {
 
   const handleOnClickChangeSort = async (id, direction) => {
     setLoading(true);
-  
+
 
     try {
       await axios.put(`/api/pdfs/${direction}/${id}`).then((res) => {

@@ -22,7 +22,7 @@ const AuthState = (props) => {
             'Content-Type': 'application/json',
           },
         })
-      ).json();
+      )
       setUser({
         accessToken: result.accessToken,
       });

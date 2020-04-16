@@ -49,7 +49,7 @@ const AllFilms = (props) => {
 
   const handleOnClickChangeSort = async (id, direction) => {
     setLoading(true);
- 
+
 
     try {
       await axios.put(`/api/films/${direction}/${id}`).then((res) => {
