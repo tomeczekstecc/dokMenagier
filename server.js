@@ -21,7 +21,7 @@ app.use(
       'http://localhost:3000',
     ],
     default: 'http://bestcodes.pl',
-    // credentials: true,
+    credentials: true,
   })
 );
 

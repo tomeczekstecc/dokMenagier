@@ -17,7 +17,7 @@ const AuthState = (props) => {
       const result = await (
         await fetch('http://localhost:5000/api/auth/refresh_token', {
           method: 'POST',
-          // credentials: 'include',
+          credentials: 'include',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -45,7 +45,7 @@ const AuthState = (props) => {
   const logOutCallback = async () => {
     await fetch('http://localhost:5000/api/auth/logout', {
       method: 'POST',
-      // credentials: 'include',
+      credentials: 'include',
     });
 
     dispatch({
