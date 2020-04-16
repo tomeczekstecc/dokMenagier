@@ -35,7 +35,14 @@ app.use('/api/pdfs', require('./router/pdfs'));
 app.use('/api/films', require('./router/films'));
 app.use('/api/upload', require('./router/upload'));
 
+var allowCrossDomain = function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+};
 
+app.use(allowCrossDomain);
 
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'client/build/index.html'), function (err) {
