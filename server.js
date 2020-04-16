@@ -18,7 +18,7 @@ app.use(
   cors({
     origin: ['http://localhost:3000', 'www.bestcodes.pl'],
     default: 'http://bestcodes.pl',
-    credentials: true,
+    // credentials: true,
   })
 );
 
