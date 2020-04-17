@@ -14,18 +14,18 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(cookieParser());
 app.use(fileUpload());
 
-// let access
-// process.env.NODE_ENV === 'development'
-//   ? (access = process.env.CORS_ACCESS_DEV)
-//   : (access = process.env.CORS_ACCESS_PROD);
-//   console.log(access);
+let access
+process.env.NODE_ENV === 'development'
+  ? (access = process.env.CORS_ACCESS_DEV)
+  : (access = process.env.CORS_ACCESS_PROD);
+  console.log(access);
 
-// app.use(
-//   cors({
-//     origin: access,
-//     credentials: true,
-//   })
-// );
+app.use(
+  cors({
+    origin: '*',
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -35,14 +35,14 @@ app.use('/api/pdfs', require('./router/pdfs'));
 app.use('/api/films', require('./router/films'));
 app.use('/api/upload', require('./router/upload'));
 
-var allowCrossDomain = function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-};
+// var allowCrossDomain = function (req, res, next) {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+//   res.header('Access-Control-Allow-Headers', 'Content-Type');
+//   next();
+// };
 
-app.use(allowCrossDomain);
+// app.use(allowCrossDomain);
 
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'client/build/index.html'), function (err) {
