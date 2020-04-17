@@ -1,4 +1,5 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const router = express.Router();
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
@@ -68,7 +69,6 @@ router.post('/login', async (req, res) => {
         result: 'error',
       });
     } else {
-
       //3. Create tokens
       const accessToken = tokens.createAccessToken(user._id);
       const refreshToken = tokens.createRefreshToken(user._id);
@@ -95,7 +95,9 @@ router.post('/login', async (req, res) => {
     });
   }
 
-  //@desc logout user
+
+});
+ //@desc logout user
   //@route POST auth/logout
   //@access private
 
@@ -108,59 +110,57 @@ router.post('/login', async (req, res) => {
       msg: 'Pomyślnie wylogowano',
     });
   });
+router.post('/refresh_token', async (req, res) => {
 
-
-
-
-
-
-  router.post('/refresh_token', async (req, res) => {
-    const token = req.cookies.refreshToken;
-    // If we don't have a token in our request
-    if (!token)
-      return res.send({
-        accessToken: '',
-      });
-    // We have a token, let's verify it!
-    let payload = null;
-    try {
-      payload = verify(token, process.env.REFRESH_TOKEN_SECRET);
-    } catch (err) {
-      return res.send({
-        accessToken: '',
-      });
-    }
-    // token is valid, check if user exist
-    const user = User.findOne({
-      _id: payload.userId,
-    });
-    if (!user)
-      return res.send({
-        accessToken: '',
-      });
-    // user exist, check if refreshtoken exist on user
-    if (user.refreshToken !== token)
-      return res.send({
-        accessToken: '',
-      });
-    // token exist, create new Refresh- and accesstoken
-    const accessToken = tokens.createAccessToken(user.id);
-    const refreshToken = tokens.createRefreshToken(user.id);
-    // update refreshtoken on user in db
-    // Could have different versions instead!
-    await User.updateOne(
-      { _id: userId },
-      {
-        $set: {
-          refreshToken,
-        },
-      }
-    );
-    // All good to go, send new refreshtoken and accesstoken
-    tokens.sendRefreshToken(res, refreshToken);
+  const token = req.cookies.refreshToken;
+  // If we don't have a token in our request
+  if (!token)
     return res.send({
-      accessToken,
+      accessToken: '',
     });
+  // We have a token, let's verify it!
+  let payload = null;
+  try {
+    payload = jwt.verify(token, process.env.REFRESH_TOKEN_SECRET);
+
+  } catch (err) {
+    return res.send({
+      accessToken: '',
+    });
+  }
+  // token is valid, check if user exist
+  const user = User.findOne({
+    _id: payload.userId,
+  });
+  if (!user)
+    return res.send({
+      accessToken: '',
+    });
+  // user exist, check if refreshtoken exist on user
+  console.log(user.refreshToken);
+  console.log(token);
+  if (user.refreshToken !== token)
+
+    return res.send({
+      accessToken: '',
+    });
+  // token exist, create new Refresh- and accesstoken
+  const accessToken = tokens.createAccessToken(user.id);
+  const refreshToken = tokens.createRefreshToken(user.id);
+  // update refreshtoken on user in db
+  // Could have different versions instead!
+  await User.updateOne(
+    { _id: userId },
+    {
+      $set: {
+        refreshToken,
+      },
+    }
+  );
+  // All good to go, send new refreshtoken and accesstoken
+  tokens.sendRefreshToken(res, refreshToken);
+  return res.send({
+    accessToken,
   });
 });
 

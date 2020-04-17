@@ -15,14 +15,16 @@ const AuthState = (props) => {
     //check if user is logged in
     async function chechRefreshToken() {
       const result = await (
-        await fetch('/api/auth/refresh_token', {
+        await fetch('http://localhost:5000/api/auth/refresh_token', {
           method: 'POST',
+          // mode: 'no-cors',
           credentials: 'include',
           headers: {
             'Content-Type': 'application/json',
           },
         })
       )
+
       setUser({
         accessToken: result.accessToken,
       });
@@ -31,16 +33,12 @@ const AuthState = (props) => {
     chechRefreshToken();
   }, []);
 
-
-
   const setUser = (user) => {
     dispatch({
       type: SET_USER,
       payload: user,
     });
   };
-
-
 
   const logOutCallback = async () => {
     await fetch('/api/auth/logout', {
@@ -51,7 +49,6 @@ const AuthState = (props) => {
     dispatch({
       type: LOGOUT_USER,
     });
-
   };
 
   return (

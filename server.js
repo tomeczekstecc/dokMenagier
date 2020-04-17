@@ -12,20 +12,20 @@ connectDB();
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(cookieParser());
-
-
-let access
-process.env.NODE_ENV === 'development'
-  ? (access = process.env.CORS_ACCESS_DEV)
-  : (access = process.env.CORS_ACCESS_PROD);
-  console.log(access);
 app.use(fileUpload());
-app.use(
-  cors({
-    origin: access,
-    credentials: true,
-  })
-);
+
+// let access
+// process.env.NODE_ENV === 'development'
+//   ? (access = process.env.CORS_ACCESS_DEV)
+//   : (access = process.env.CORS_ACCESS_PROD);
+//   console.log(access);
+
+// app.use(
+//   cors({
+//     origin: access,
+//     credentials: true,
+//   })
+// );
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

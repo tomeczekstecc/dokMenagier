@@ -90,14 +90,14 @@ const TopHeader = (props) => {
         </li>
 
         <li>
-          {' '}
-          <Link
+
+          <a
             onClick={handleClick}
             style={user.accessToken ? style.li : { display: 'none' }}
           >
             {/* <i className='fas fa-heart'></i> */}
             Log<strong>Out</strong>
-          </Link>
+          </a>
         </li>
       </ul>
     </nav>
