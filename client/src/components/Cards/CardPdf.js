@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Card, Icon, Badge } from 'antd';
 import { Link } from 'react-router-dom';
 import PdfContext from '../../context/pdf/pdfContext';
+import rwd from '../../img/rwd.jpg'
 
 const { Meta } = Card;
 
@@ -63,14 +64,8 @@ const CardPdf = ({
           <img
             style={style.img}
             alt='example'
-            // src='./spinner.gif'
-            // src={`1
-            //   loading
-            //     ? spinner
-            //     : 'http://bestcodes.pl/lsi/app_files/img/rwd.jpg'
-            // }
-            src='http://bestcodes.pl/lsi/app_files/img/rwd.jpg'
-            // src='https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png'
+            src={rwd}
+
           />
         }
         actions={[

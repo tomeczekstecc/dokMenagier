@@ -1,6 +1,10 @@
 import React from 'react';
 import { Card, Icon, Badge } from 'antd';
 import {Link} from 'react-router-dom'
+
+import rwd from '../../../img/rwd.jpg';
+
+
 const { Meta } = Card;
 
 const CardPdfPreview = ({ body }) => {
@@ -62,13 +66,8 @@ const CardPdfPreview = ({ body }) => {
           <img
             style={style.img}
             alt='example'
-            // src='./spinner.gif'
-            // src={`1
-            //   loading
-            //     ? spinner
-            //     : 'http://bestcodes.pl/lsi/app_files/img/rwd.jpg'
-            // }
-            src='http://bestcodes.pl/lsi/app_files/img/rwd.jpg'
+
+            src={rwd}
             // src='https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png'
           />
         }
