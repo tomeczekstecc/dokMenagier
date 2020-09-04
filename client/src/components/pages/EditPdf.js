@@ -22,13 +22,13 @@ const EditPdf = (props) => {
   const [pending, setPending] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
 
-  if (
-    !user.accessToken ||
-    user.accessToken === undefined ||
-    user.accessToken === ''
-  ) {
-    props.history.push('/login');
-  }
+  // if (
+  //   !user.accessToken ||
+  //   user.accessToken === undefined ||
+  //   user.accessToken === ''
+  // ) {
+  //   props.history.push('/login');
+  // }
 
   let {
     _id,
@@ -42,6 +42,7 @@ const EditPdf = (props) => {
     pagesCount,
     premiereTag,
     archived,
+
   } = curPdf[0];
 
   let convPremiereTag, convArchived;
@@ -103,11 +104,16 @@ const EditPdf = (props) => {
       body.archived = false;
     } else {
       body[e.target.id.split('edit_')[1]] = e.target.value;
+      body.pdfFileName = `${
+        '[' + body.ver + ']' + '_' + body.shortTitle + '_' + body.target
+        }.pdf`;
+
     }
     //eslint-disable-next-line
     body.pdfFileName = `${
       '[' + body.ver + ']' + '_' + body.shortTitle + '_' + body.target
     }.pdf`;
+
 
     if (
       body.title !== '' &&
@@ -190,6 +196,7 @@ const EditPdf = (props) => {
 
         <div style={style.container}>
           <CardPdfPreview style={style.preview} body={body} />
+
           <Form {...formItemLayout} onSubmit={handleSubmit}>
             <Form.Item label='Tytuł' onChange={handleChange} hasFeedback>
               {getFieldDecorator(
@@ -423,6 +430,16 @@ const EditPdf = (props) => {
                   Wróć
                 </Button>
               </Link>
+            </Form.Item>
+            <Form.Item onChange={handleChange} label='Nazwa pliku'>
+              {getFieldDecorator(
+                'pdfFileName',
+
+                {
+                  initialValue: body.pdfFileName,
+
+                }
+              )(<Input type='text' />)}
             </Form.Item>
           </Form>
         </div>

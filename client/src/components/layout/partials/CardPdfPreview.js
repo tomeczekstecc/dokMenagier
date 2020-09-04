@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Icon, Badge } from 'antd';
+import { Card, Icon, Badge, Button } from 'antd';
 import {Link} from 'react-router-dom'
 
 import rwd from '../../../img/rwd.jpg';
@@ -92,6 +92,7 @@ const CardPdfPreview = ({ body }) => {
           }
         />
       </Card>
+
     </div>
   );
 };

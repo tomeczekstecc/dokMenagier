@@ -23,13 +23,13 @@ const EditFilm = (props) => {
   const { user } = authContext;
 
 
-  if (
-    !user.accessToken ||
-    user.accessToken === undefined ||
-    user.accessToken === ''
-  ) {
-    props.history.push('/login');
-  }
+  // if (
+  //   !user.accessToken ||
+  //   user.accessToken === undefined ||
+  //   user.accessToken === ''
+  // ) {
+  //   props.history.push('/login');
+  // }
 
 
   let {
@@ -100,9 +100,11 @@ body.type='film'
       body[e.target.id.split('edit_')[1]] = e.target.value;
     }
     //eslint-disable-next-line
-    body.filmFileName = `${
-      '[' + body.ver + ']' + '_' + body.linkYT + '_' + body.target
-    }.film`;
+    // body.filmFileName = `
+    // ${
+    //   '[' + body.ver + ']' + '_' + body.linkYT + '_' + body.target
+    // }.film
+    // `;
 
     if (
       body.title !== '' &&

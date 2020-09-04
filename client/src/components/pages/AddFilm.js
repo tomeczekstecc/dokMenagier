@@ -16,16 +16,16 @@ const AddFilm = (props) => {
   const { setAllReady, allReady } = filmContext;
   const { enqueueSnackbar } = useSnackbar();
   const authContext = useContext(AuthContext);
-  const { user } = authContext;
+  // const { user } = authContext;
 
 
-  if (
-    !user.accessToken ||
-    user.accessToken === undefined ||
-    user.accessToken === ''
-  ) {
-    props.history.push('/login');
-  }
+  // if (
+  //   !user.accessToken ||
+  //   user.accessToken === undefined ||
+  //   user.accessToken === ''
+  // ) {
+  //   props.history.push('/login');
+  // }
 
   useEffect(() => {
     setBody({

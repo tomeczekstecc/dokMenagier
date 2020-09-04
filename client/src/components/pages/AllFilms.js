@@ -16,13 +16,13 @@ const AllFilms = (props) => {
   const authContext = useContext(AuthContext);
   const { user } = authContext;
 
-  if (
-    !user.accessToken ||
-    user.accessToken === undefined ||
-    user.accessToken === ''
-  ) {
-    props.history.push('/login');
-  }
+  // if (
+  //   !user.accessToken ||
+  //   user.accessToken === undefined ||
+  //   user.accessToken === ''
+  // ) {
+  //   props.history.push('/login');
+  // }
 
   useEffect(() => {
     getFilms();
